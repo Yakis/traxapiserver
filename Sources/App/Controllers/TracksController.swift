@@ -37,7 +37,19 @@ final class TracksController {
     
     fileprivate func update(request: Request) throws -> ResponseRepresentable {
         guard let json = request.json else { throw Abort.badRequest }
-        let track = try Track(json: json)
+        let track = try request.parameters.next(Track.self)
+        let newTrack = try Track(json: json)
+        track.name = newTrack.name
+        track.adress = newTrack.adress
+        track.childFriendly = newTrack.childFriendly
+        track.latitude = newTrack.latitude
+        track.longitude = newTrack.longitude
+        track.openingTimes = newTrack.openingTimes
+        track.ownerId = newTrack.ownerId
+        track.postcode = newTrack.postcode
+        track.prices = newTrack.prices
+        track.rating = newTrack.rating
+        track.soilType = newTrack.soilType
         try track.save()
         return track
     }
@@ -65,4 +77,12 @@ final class TracksController {
     }
     
     
+}
+
+
+extension Request {
+    fileprivate func track() throws -> Track {
+        guard let json = json else { throw Abort.badRequest }
+        return try Track(json: json)
+    }
 }

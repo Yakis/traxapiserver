@@ -17,7 +17,7 @@ final class Track: Model {
     var latitude: Double
     var longitude: Double
     var soilType: String
-    var openingTymes: String
+    var openingTimes: String
     var prices: String
     var childFriendly: Bool
     var rating: Double
@@ -44,7 +44,7 @@ final class Track: Model {
          latitude: Double,
          longitude: Double,
          soilType: String,
-         openingTymes: String,
+         openingTimes: String,
          prices: String,
          childFriendly: Bool,
          rating: Double,
@@ -56,7 +56,7 @@ final class Track: Model {
         self.latitude = latitude
         self.longitude = longitude
         self.soilType = soilType
-        self.openingTymes = openingTymes
+        self.openingTimes = openingTimes
         self.prices = prices
         self.childFriendly = childFriendly
         self.rating = rating
@@ -71,7 +71,7 @@ final class Track: Model {
         self.latitude = try row.get(Track.latitudeKey)
         self.longitude = try row.get(Track.longitudeKey)
         self.soilType = try row.get(Track.soilTypeKey)
-        self.openingTymes = try row.get(Track.openingTimesKey)
+        self.openingTimes = try row.get(Track.openingTimesKey)
         self.prices = try row.get(Track.pricesKey)
         self.childFriendly = try row.get(Track.childFriendlyKey)
         self.rating = try row.get(Track.ratingKey)
@@ -87,7 +87,7 @@ final class Track: Model {
         try row.set(Track.latitudeKey, latitude)
         try row.set(Track.longitudeKey, longitude)
         try row.set(Track.soilTypeKey, soilType)
-        try row.set(Track.openingTimesKey, openingTymes)
+        try row.set(Track.openingTimesKey, openingTimes)
         try row.set(Track.pricesKey, prices)
         try row.set(Track.childFriendlyKey, childFriendly)
         try row.set(Track.ratingKey, rating)
@@ -130,7 +130,7 @@ extension Track: JSONConvertible {
                   latitude: try json.get(Track.latitudeKey),
                   longitude: try json.get(Track.longitudeKey),
                   soilType: try json.get(Track.soilTypeKey),
-                  openingTymes: try json.get(Track.openingTimesKey),
+                  openingTimes: try json.get(Track.openingTimesKey),
                   prices: try json.get(Track.pricesKey),
                   childFriendly: try json.get(Track.childFriendlyKey),
                   rating: try json.get(Track.ratingKey),
@@ -146,7 +146,7 @@ extension Track: JSONConvertible {
         try json.set(Track.latitudeKey, latitude)
         try json.set(Track.longitudeKey, longitude)
         try json.set(Track.soilTypeKey, soilType)
-        try json.set(Track.openingTimesKey, openingTymes)
+        try json.set(Track.openingTimesKey, openingTimes)
         try json.set(Track.pricesKey, prices)
         try json.set(Track.childFriendlyKey, childFriendly)
         try json.set(Track.ratingKey, rating)
