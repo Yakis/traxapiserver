@@ -73,7 +73,7 @@ final class TracksController {
     fileprivate func saveImage(request: Request) throws -> ResponseRepresentable {
         guard let json = request.json else { throw Abort.badRequest }
         let trackId = request.parameters.wrapped["track_id"]?.int
-        print("Track ID==== \(trackId! + 5 )")
+        print("Track ID==== \(trackId! + 5)")
        // let track = try request.parameters.next(Track.self)
         let image = try Image(json: json)
         image.track_id = trackId!
