@@ -45,11 +45,11 @@ final class ImagesController {
     
     
     func addRoutes(to routeBuilder: RouteBuilder) {
-        routeBuilder.get("all", handler: getAll)
-        routeBuilder.post("create", handler: create)
-        routeBuilder.get(Image.parameter, handler: getOne)
-        routeBuilder.patch(Image.parameter, handler: update)
-        routeBuilder.delete(Image.parameter, handler: delete)
+//        routeBuilder.get("all", handler: getAll)
+//        routeBuilder.post("create", handler: create)
+//        routeBuilder.get(Image.parameter, handler: getOne)
+//        routeBuilder.patch(Image.parameter, handler: update)
+//        routeBuilder.delete(Image.parameter, handler: delete)
     }
     
     

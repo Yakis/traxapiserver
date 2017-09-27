@@ -63,6 +63,26 @@ final class TracksController {
     }
     
     
+    fileprivate func getImages(request: Request) throws -> ResponseRepresentable {
+        let track = try request.parameters.next(Track.self)
+        let images = try track.images.all().makeJSON()
+        return images
+    }
+    
+    
+    fileprivate func saveImage(request: Request) throws -> ResponseRepresentable {
+        guard let json = request.json else { throw Abort.badRequest }
+        let trackId = request.parameters.wrapped["track_id"]?.int
+        print("Track ID==== \(trackId! + 5 )")
+       // let track = try request.parameters.next(Track.self)
+        let image = try Image(json: json)
+        image.track_id = trackId!
+        print(image.track_id.description)
+        try image.save()
+        return image
+    }
+    
+    
     func addRoutes(to routeBuilder: RouteBuilder) {
         routeBuilder.get("all", handler: getAll)
         routeBuilder.post("create", handler: create)
@@ -70,6 +90,10 @@ final class TracksController {
         routeBuilder.patch(Track.parameter, handler: update)
         routeBuilder.delete(Track.parameter, handler: delete)
         routeBuilder.get("", handler: getByName)
+        
+        //Child routes
+        routeBuilder.post(Track.parameter, "images", handler: saveImage)
+        routeBuilder.get(Track.parameter, "images", handler: getImages)
         
 //        let adminMiddleware = AdminMiddleware()
 //        let adminProtected = routeBuilder.grouped(adminMiddleware)

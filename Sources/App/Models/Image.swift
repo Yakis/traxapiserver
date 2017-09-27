@@ -51,7 +51,10 @@ extension Image: Preparation {
         try database.create(self) { (image) in
             image.id()
             image.string(Image.imageUrlKey)
-            image.string(Image.track_idKey)
+            image.parent(Track.self, optional: false)
+            image.foreignKey(Image.track_idKey, references: Image.idKey, on: Track.self)
+           // image.string(Image.track_idKey)
+            
         }
     }
     
@@ -72,7 +75,7 @@ extension Image: JSONConvertible {
         var json = JSON()
         try json.set(Image.idKey, id)
         try json.set(Image.imageUrlKey, imageUrl)
-        try json.set(Image.track_idKey, track_id)
+       // try json.set(Image.track_idKey, track_id)
         return json
     }
 }

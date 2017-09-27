@@ -157,3 +157,10 @@ extension Track: JSONConvertible {
 
 // Convenience of returning response
 extension Track: ResponseRepresentable {}
+
+
+extension Track {
+    var images: Children<Track, Image> {
+        return children()
+    }
+}
