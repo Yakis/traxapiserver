@@ -19,6 +19,7 @@ final class Image: Model {
     static let idKey = "id"
     static let imageUrlKey = "imageUrl"
     static let track_idKey = "track_id"
+    static let imagesKey = "images"
     
     
     init(imageUrl: String,
@@ -72,6 +73,7 @@ extension Image: JSONConvertible {
         var json = JSON()
         try json.set(Image.idKey, id)
         try json.set(Image.imageUrlKey, imageUrl)
+        try json.set(Image.track_idKey, track_id)
         return json
     }
 }
