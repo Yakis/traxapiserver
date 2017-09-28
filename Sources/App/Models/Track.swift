@@ -21,7 +21,7 @@ final class Track: Model {
     var prices: String
     var childFriendly: Bool
     var rating: Double
-    var ownerId: Int
+    var owner_id: Int
     
     
     // Use these keys instead of magic strings
@@ -36,6 +36,7 @@ final class Track: Model {
     static let pricesKey = "prices"
     static let childFriendlyKey = "child_friendly"
     static let ratingKey = "rating"
+    static let imagesKey = "images"
     static let ownerIdKey = "owner_id"
     
     init(name: String,
@@ -60,7 +61,7 @@ final class Track: Model {
         self.prices = prices
         self.childFriendly = childFriendly
         self.rating = rating
-        self.ownerId = ownerId
+        self.owner_id = ownerId
     }
     
     
@@ -75,7 +76,7 @@ final class Track: Model {
         self.prices = try row.get(Track.pricesKey)
         self.childFriendly = try row.get(Track.childFriendlyKey)
         self.rating = try row.get(Track.ratingKey)
-        self.ownerId = try row.get(Track.ownerIdKey)
+        self.owner_id = try row.get(Track.ownerIdKey)
     }
     
     
@@ -91,7 +92,7 @@ final class Track: Model {
         try row.set(Track.pricesKey, prices)
         try row.set(Track.childFriendlyKey, childFriendly)
         try row.set(Track.ratingKey, rating)
-        try row.set(Track.ownerIdKey, ownerId)
+        try row.set(Track.ownerIdKey, owner_id)
         return row
     }
 }
@@ -99,19 +100,20 @@ final class Track: Model {
 extension Track: Preparation {
     
     static func prepare(_ database: Database) throws {
-        try database.create(self) { (track) in
-            track.id()
-            track.string(Track.nameKey)
-            track.string(Track.adressKey)
-            track.string(Track.postcodeKey)
-            track.double(Track.latitudeKey)
-            track.double(Track.longitudeKey)
-            track.string(Track.soilTypeKey)
-            track.string(Track.openingTimesKey)
-            track.string(Track.pricesKey)
-            track.bool(Track.childFriendlyKey)
-            track.double(Track.ratingKey)
-            track.int(Track.ownerIdKey)
+        try database.create(self) { (builder) in
+            builder.id()
+            builder.string(Track.nameKey)
+            builder.string(Track.adressKey)
+            builder.string(Track.postcodeKey)
+            builder.double(Track.latitudeKey)
+            builder.double(Track.longitudeKey)
+            builder.string(Track.soilTypeKey)
+            builder.string(Track.openingTimesKey)
+            builder.string(Track.pricesKey)
+            builder.bool(Track.childFriendlyKey)
+            builder.double(Track.ratingKey)
+            builder.int(Track.ownerIdKey)
+            //builder.foreignId(for: Owner.self)
         }
     }
     
@@ -150,8 +152,8 @@ extension Track: JSONConvertible {
         try json.set(Track.pricesKey, prices)
         try json.set(Track.childFriendlyKey, childFriendly)
         try json.set(Track.ratingKey, rating)
-        try json.set(Track.ownerIdKey, ownerId)
-        try json.set("images", images.all())
+        try json.set(Track.ownerIdKey, owner_id)
+        try json.set(Track.imagesKey, images.all())
         return json
     }
 }
@@ -162,6 +164,11 @@ extension Track: ResponseRepresentable {}
 
 extension Track {
     var images: Children<Track, Image> {
+        return children()
+    }
+    
+    
+    var posts: Children<Track, Post> {
         return children()
     }
 }

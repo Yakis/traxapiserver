@@ -125,3 +125,19 @@ extension User: JSONConvertible {
 
 // Convenience of returning response
 extension User: ResponseRepresentable {}
+
+extension User {
+    var settings: Children<User, Setting> {
+        return children()
+    }
+    
+//    var comments: Children<User, Comment> {
+//        return children()
+//    }
+    
+    
+    var tokens: Children<User, Token> {
+        return children()
+    }
+    
+}

@@ -65,7 +65,7 @@ extension Post: Preparation {
             post.string(Post.contentKey)
             post.string(Post.imageKey)
             post.string(Post.timestampKey)
-            post.string(Post.track_idKey)
+            post.foreignId(for: Track.self)
         }
     }
     
@@ -95,5 +95,16 @@ extension Post: JSONConvertible {
     }
 }
 
+
+//extension Post: Timestampable {}
+
+
 // Convenience of returning response
 extension Post: ResponseRepresentable {}
+
+
+extension Post {
+    var comments: Children<Post, Comment> {
+        return children()
+    }
+}

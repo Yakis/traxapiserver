@@ -65,7 +65,7 @@ extension Setting: Preparation {
             setting.string(Setting.trackUpdateKey)
             setting.string(Setting.tagNotifyKey)
             setting.string(Setting.locationEnabledKey)
-            setting.string(Setting.user_idKey)
+            setting.foreignId(for: User.self)
         }
     }
     

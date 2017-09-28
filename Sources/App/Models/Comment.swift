@@ -64,8 +64,10 @@ extension Comment: Preparation {
             comment.id()
             comment.string(Comment.contentKey)
             comment.string(Comment.timestampKey)
+            // Need to research if is posible to use two foreign keys
             comment.int(Comment.user_idKey)
-            comment.int(Comment.post_idKey)
+            //comment.foreignId(for: User.self)
+            comment.foreignId(for: Post.self)
         }
     }
     
@@ -94,6 +96,10 @@ extension Comment: JSONConvertible {
         return json
     }
 }
+
+
+//extension Comment: Timestampable {}
+
 
 // Convenience of returning response
 extension Comment: ResponseRepresentable {}

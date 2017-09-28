@@ -51,7 +51,7 @@ extension Token: Preparation {
         try database.create(self) { (token) in
             token.id()
             token.string(Token.tokenKey)
-            token.string(Token.user_idKey)
+            token.foreignId(for: User.self)
         }
     }
     

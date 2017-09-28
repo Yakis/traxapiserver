@@ -50,7 +50,7 @@ final class TracksController {
         track.latitude = newTrack.latitude
         track.longitude = newTrack.longitude
         track.openingTimes = newTrack.openingTimes
-        track.ownerId = newTrack.ownerId
+        track.owner_id = newTrack.owner_id
         track.postcode = newTrack.postcode
         track.prices = newTrack.prices
         track.rating = newTrack.rating

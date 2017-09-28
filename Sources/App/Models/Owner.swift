@@ -60,12 +60,12 @@ final class Owner: Model {
 extension Owner: Preparation {
     
     static func prepare(_ database: Database) throws {
-        try database.create(self) { (owner) in
-            owner.id()
-            owner.string(Owner.emailKey)
-            owner.string(Owner.firstNameKey)
-            owner.string(Owner.lastNameKey)
-            owner.string(Owner.contactNumberKey)
+        try database.create(self) { (builder) in
+            builder.id()
+            builder.string(Owner.emailKey)
+            builder.string(Owner.firstNameKey)
+            builder.string(Owner.lastNameKey)
+            builder.string(Owner.contactNumberKey)
         }
     }
     
@@ -98,3 +98,10 @@ extension Owner: JSONConvertible {
 
 // Convenience of returning response
 extension Owner: ResponseRepresentable {}
+
+
+extension Owner {
+    var tracks: Children<Owner, Track> {
+        return children()
+    }
+}
