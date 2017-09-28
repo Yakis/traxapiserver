@@ -151,6 +151,7 @@ extension Track: JSONConvertible {
         try json.set(Track.childFriendlyKey, childFriendly)
         try json.set(Track.ratingKey, rating)
         try json.set(Track.ownerIdKey, ownerId)
+        try json.set("images", images.all())
         return json
     }
 }
