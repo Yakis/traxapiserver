@@ -13,7 +13,6 @@ final class Post: Model {
     let storage = Storage()
     var content: String
     var image: String
-    var timestamp: String
     var track_id: Int
     
     
@@ -21,18 +20,15 @@ final class Post: Model {
     static let idKey = "id"
     static let contentKey = "content"
     static let imageKey = "image"
-    static let timestampKey = "timestamp"
     static let track_idKey = "track_id"
     
     
     init(content: String,
          image: String,
-         timestamp: String,
          track_id: Int
         ) {
         self.content = content
         self.image = image
-        self.timestamp = timestamp
         self.track_id = track_id
         
     }
@@ -41,7 +37,6 @@ final class Post: Model {
     init(row: Row) throws {
         self.content = try row.get(Post.contentKey)
         self.image = try row.get(Post.imageKey)
-        self.timestamp = try row.get(Post.timestampKey)
         self.track_id = try row.get(Post.track_idKey)
         
     }
@@ -51,7 +46,6 @@ final class Post: Model {
         var row = Row()
         try row.set(Post.contentKey, content)
         try row.set(Post.imageKey, image)
-        try row.set(Post.timestampKey, timestamp)
         try row.set(Post.track_idKey, track_id)
         return row
     }
@@ -64,7 +58,6 @@ extension Post: Preparation {
             post.id()
             post.string(Post.contentKey)
             post.string(Post.imageKey)
-            post.string(Post.timestampKey)
             post.foreignId(for: Track.self)
         }
     }
@@ -80,7 +73,6 @@ extension Post: JSONConvertible {
     convenience init(json: JSON) throws {
         self.init(content: try json.get(Post.contentKey),
                   image: try json.get(Post.imageKey),
-                  timestamp: try json.get(Post.timestampKey),
                   track_id: try json.get(Post.track_idKey)
         )}
     
@@ -89,14 +81,13 @@ extension Post: JSONConvertible {
         try json.set(Post.idKey, id)
         try json.set(Post.contentKey, content)
         try json.set(Post.imageKey, image)
-        try json.set(Post.timestampKey, timestamp)
         try json.set(Post.track_idKey, track_id)
         return json
     }
 }
 
 
-//extension Post: Timestampable {}
+extension Post: Timestampable {}
 
 
 // Convenience of returning response

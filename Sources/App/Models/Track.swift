@@ -158,6 +158,10 @@ extension Track: JSONConvertible {
     }
 }
 
+
+extension Track: Timestampable {}
+
+
 // Convenience of returning response
 extension Track: ResponseRepresentable {}
 
