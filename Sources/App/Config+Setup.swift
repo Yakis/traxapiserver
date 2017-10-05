@@ -27,6 +27,8 @@ extension Config {
         preparations.append(Comment.self)
         preparations.append(Setting.self)
         preparations.append(Image.self)
+        preparations.append(Video.self)
+        preparations.append(Review.self)
         preparations.append(Token.self)
     }
 }

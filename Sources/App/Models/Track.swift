@@ -16,10 +16,10 @@ final class Track: Model {
     var postcode: String
     var latitude: Double
     var longitude: Double
-    var soilType: String
-    var openingTimes: String
+    var soil_type: String
+    var opening_times: String
     var prices: String
-    var childFriendly: Bool
+    var child_friendly: Bool
     var rating: Double
     var owner_id: Int
     
@@ -44,24 +44,24 @@ final class Track: Model {
          postcode: String,
          latitude: Double,
          longitude: Double,
-         soilType: String,
-         openingTimes: String,
+         soil_type: String,
+         opening_times: String,
          prices: String,
-         childFriendly: Bool,
+         child_friendly: Bool,
          rating: Double,
-         ownerId: Int
+         owner_id: Int
         ) {
         self.name = name
         self.adress = adress
         self.postcode = postcode
         self.latitude = latitude
         self.longitude = longitude
-        self.soilType = soilType
-        self.openingTimes = openingTimes
+        self.soil_type = soil_type
+        self.opening_times = opening_times
         self.prices = prices
-        self.childFriendly = childFriendly
+        self.child_friendly = child_friendly
         self.rating = rating
-        self.owner_id = ownerId
+        self.owner_id = owner_id
     }
     
     
@@ -71,10 +71,10 @@ final class Track: Model {
         self.postcode = try row.get(Track.postcodeKey)
         self.latitude = try row.get(Track.latitudeKey)
         self.longitude = try row.get(Track.longitudeKey)
-        self.soilType = try row.get(Track.soilTypeKey)
-        self.openingTimes = try row.get(Track.openingTimesKey)
+        self.soil_type = try row.get(Track.soilTypeKey)
+        self.opening_times = try row.get(Track.openingTimesKey)
         self.prices = try row.get(Track.pricesKey)
-        self.childFriendly = try row.get(Track.childFriendlyKey)
+        self.child_friendly = try row.get(Track.childFriendlyKey)
         self.rating = try row.get(Track.ratingKey)
         self.owner_id = try row.get(Track.ownerIdKey)
     }
@@ -87,10 +87,10 @@ final class Track: Model {
         try row.set(Track.postcodeKey, postcode)
         try row.set(Track.latitudeKey, latitude)
         try row.set(Track.longitudeKey, longitude)
-        try row.set(Track.soilTypeKey, soilType)
-        try row.set(Track.openingTimesKey, openingTimes)
+        try row.set(Track.soilTypeKey, soil_type)
+        try row.set(Track.openingTimesKey, opening_times)
         try row.set(Track.pricesKey, prices)
-        try row.set(Track.childFriendlyKey, childFriendly)
+        try row.set(Track.childFriendlyKey, child_friendly)
         try row.set(Track.ratingKey, rating)
         try row.set(Track.ownerIdKey, owner_id)
         return row
@@ -130,12 +130,12 @@ extension Track: JSONConvertible {
                   postcode: try json.get(Track.postcodeKey),
                   latitude: try json.get(Track.latitudeKey),
                   longitude: try json.get(Track.longitudeKey),
-                  soilType: try json.get(Track.soilTypeKey),
-                  openingTimes: try json.get(Track.openingTimesKey),
+                  soil_type: try json.get(Track.soilTypeKey),
+                  opening_times: try json.get(Track.openingTimesKey),
                   prices: try json.get(Track.pricesKey),
-                  childFriendly: try json.get(Track.childFriendlyKey),
+                  child_friendly: try json.get(Track.childFriendlyKey),
                   rating: try json.get(Track.ratingKey),
-                  ownerId: try json.get(Track.ownerIdKey))
+                  owner_id: try json.get(Track.ownerIdKey))
     }
     
     func makeJSON() throws -> JSON {
@@ -146,10 +146,10 @@ extension Track: JSONConvertible {
         try json.set(Track.postcodeKey, postcode)
         try json.set(Track.latitudeKey, latitude)
         try json.set(Track.longitudeKey, longitude)
-        try json.set(Track.soilTypeKey, soilType)
-        try json.set(Track.openingTimesKey, openingTimes)
+        try json.set(Track.soilTypeKey, soil_type)
+        try json.set(Track.openingTimesKey, opening_times)
         try json.set(Track.pricesKey, prices)
-        try json.set(Track.childFriendlyKey, childFriendly)
+        try json.set(Track.childFriendlyKey, child_friendly)
         try json.set(Track.ratingKey, rating)
         try json.set(Track.ownerIdKey, owner_id)
         try json.set(Track.imagesKey, images.all())
@@ -171,7 +171,18 @@ extension Track {
     }
     
     
+    var videos: Children<Track, Video> {
+        return children()
+    }
+    
+    
     var posts: Children<Track, Post> {
         return children()
     }
+    
+    
+    var reviews: Children<Track, Review> {
+        return children()
+    }
+    
 }

@@ -19,6 +19,7 @@ final class Comment: Model {
     static let idKey = "id"
     static let contentKey = "content"
     static let post_idKey = "post_id"
+    static let user_idKey = "user_id"
     
     
     init(content: String,
@@ -51,9 +52,7 @@ extension Comment: Preparation {
         try database.create(self) { (comment) in
             comment.id()
             comment.string(Comment.contentKey)
-            // Need to research if is posible to use two foreign keys
-            //comment.int(Comment.user_idKey)
-            //comment.foreignId(for: User.self)
+            comment.int(Comment.user_idKey)
             comment.foreignId(for: Post.self)
         }
     }

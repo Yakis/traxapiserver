@@ -46,15 +46,15 @@ final class TracksController {
         let newTrack = try Track(json: json)
         track.name = newTrack.name
         track.adress = newTrack.adress
-        track.childFriendly = newTrack.childFriendly
+        track.child_friendly = newTrack.child_friendly
         track.latitude = newTrack.latitude
         track.longitude = newTrack.longitude
-        track.openingTimes = newTrack.openingTimes
+        track.opening_times = newTrack.opening_times
         track.owner_id = newTrack.owner_id
         track.postcode = newTrack.postcode
         track.prices = newTrack.prices
         track.rating = newTrack.rating
-        track.soilType = newTrack.soilType
+        track.soil_type = newTrack.soil_type
         try track.save()
         return track
     }
