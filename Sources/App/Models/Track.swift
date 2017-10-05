@@ -112,8 +112,7 @@ extension Track: Preparation {
             builder.string(Track.pricesKey)
             builder.bool(Track.childFriendlyKey)
             builder.double(Track.ratingKey)
-            builder.int(Track.ownerIdKey)
-            //builder.foreignId(for: Owner.self)
+            builder.foreignId(for: Owner.self)
         }
     }
     

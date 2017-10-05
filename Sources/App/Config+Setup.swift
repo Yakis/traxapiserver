@@ -20,8 +20,8 @@ extension Config {
     /// Add all models that should have their
     /// schemas prepared before the app boots
     private func setupPreparations() throws {
-        preparations.append(Track.self)
         preparations.append(Owner.self)
+        preparations.append(Track.self)
         preparations.append(User.self)
         preparations.append(Post.self)
         preparations.append(Comment.self)

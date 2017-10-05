@@ -24,11 +24,11 @@ final class User: Model {
     static let idKey = "id"
     static let usernameKey = "username"
     static let emailKey = "email"
-    static let firstNameKey = "firstName"
-    static let lastNameKey = "lastName"
+    static let firstNameKey = "first_name"
+    static let lastNameKey = "last_name"
     static let postcodeKey = "postcode"
     static let avatarKey = "avatar"
-    static let facebookUidKey = "facebookUid"
+    static let facebookUidKey = "facebook_uid"
     
     
     init(username: String,

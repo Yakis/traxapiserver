@@ -17,7 +17,7 @@ final class Image: Model {
     
     // Use these keys instead of magic strings
     static let idKey = "id"
-    static let imageUrlKey = "imageUrl"
+    static let imageUrlKey = "image_url"
     static let track_idKey = "track_id"
     static let imagesKey = "images"
     

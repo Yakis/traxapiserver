@@ -19,9 +19,9 @@ final class Setting: Model {
     
     // Use these keys instead of magic strings
     static let idKey = "id"
-    static let trackUpdateKey = "trackUpdate"
-    static let tagNotifyKey = "tagNotify"
-    static let locationEnabledKey = "locationEnabled"
+    static let trackUpdateKey = "track_update"
+    static let tagNotifyKey = "tag_notify"
+    static let locationEnabledKey = "location_enabled"
     static let user_idKey = "user_id"
     
     

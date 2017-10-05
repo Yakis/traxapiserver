@@ -20,9 +20,9 @@ final class Owner: Model {
     // Use these keys instead of magic strings
     static let idKey = "id"
     static let emailKey = "email"
-    static let firstNameKey = "firstName"
-    static let lastNameKey = "lastName"
-    static let contactNumberKey = "contactNumber"
+    static let firstNameKey = "first_name"
+    static let lastNameKey = "last_name"
+    static let contactNumberKey = "contact_number"
     
     
     init(email: String,
