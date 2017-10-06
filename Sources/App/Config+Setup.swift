@@ -25,6 +25,7 @@ extension Config {
         preparations.append(User.self)
         preparations.append(Post.self)
         preparations.append(PostComment.self)
+        preparations.append(Event.self)
         preparations.append(Setting.self)
         preparations.append(Image.self)
         preparations.append(Video.self)

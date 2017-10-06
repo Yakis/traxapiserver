@@ -185,4 +185,8 @@ extension Track {
         return children()
     }
     
+    var events: Children<Track, Event> {
+        return children()
+    }
+    
 }
