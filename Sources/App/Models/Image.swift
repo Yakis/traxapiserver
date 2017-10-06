@@ -80,3 +80,11 @@ extension Image: JSONConvertible {
 
 // Convenience of returning response
 extension Image: ResponseRepresentable {}
+
+extension Image {
+    
+    var comments: Children<Image, ImageComment> {
+        return children()
+    }
+    
+}

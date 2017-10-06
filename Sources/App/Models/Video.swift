@@ -80,3 +80,12 @@ extension Video: JSONConvertible {
 
 // Convenience of returning response
 extension Video: ResponseRepresentable {}
+
+
+extension Video {
+    
+    var comments: Children<Video, VideoComment> {
+        return children()
+    }
+    
+}
