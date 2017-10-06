@@ -87,4 +87,9 @@ extension Image {
         return children()
     }
     
+    
+    var likes: Children<Image, ImageLike> {
+        return children()
+    }
+    
 }

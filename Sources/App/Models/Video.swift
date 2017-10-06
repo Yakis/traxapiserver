@@ -88,4 +88,10 @@ extension Video {
         return children()
     }
     
+    
+    var likes: Children<Video, VideoLike> {
+        return children()
+    }
+    
+    
 }
