@@ -24,7 +24,7 @@ extension Config {
         preparations.append(Track.self)
         preparations.append(User.self)
         preparations.append(Post.self)
-        preparations.append(Comment.self)
+        preparations.append(PostComment.self)
         preparations.append(Setting.self)
         preparations.append(Image.self)
         preparations.append(Video.self)

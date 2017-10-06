@@ -95,7 +95,7 @@ extension Post: ResponseRepresentable {}
 
 
 extension Post {
-    var comments: Children<Post, Comment> {
+    var comments: Children<Post, PostComment> {
         return children()
     }
 }

@@ -35,8 +35,8 @@ class V1: RouteCollection {
         let postsController = PostsController()
         postsController.addRoutes(to: posts)
         
-        let commentsController = CommentsController()
-        commentsController.addRoutes(to: comments)
+        let postsCommentsController = PostsCommentsController()
+        postsCommentsController.addRoutes(to: comments)
         
         let settingsController = SettingsController()
         settingsController.addRoutes(to: settings)

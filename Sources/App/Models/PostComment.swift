@@ -8,7 +8,7 @@
 
 import PostgreSQLProvider
 
-final class Comment: Model {
+final class PostComment: Model {
     
     let storage = Storage()
     var content: String
@@ -32,28 +32,28 @@ final class Comment: Model {
     
     
     init(row: Row) throws {
-        self.content = try row.get(Comment.contentKey)
-        self.post_id = try row.get(Comment.post_idKey)
+        self.content = try row.get(PostComment.contentKey)
+        self.post_id = try row.get(PostComment.post_idKey)
         
     }
     
     
     func makeRow() throws -> Row {
         var row = Row()
-        try row.set(Comment.contentKey, content)
-        try row.set(Comment.post_idKey, post_id)
+        try row.set(PostComment.contentKey, content)
+        try row.set(PostComment.post_idKey, post_id)
         return row
     }
 }
 // For database prepare and revert
-extension Comment: Preparation {
+extension PostComment: Preparation {
     
     static func prepare(_ database: Database) throws {
-        try database.create(self) { (comment) in
-            comment.id()
-            comment.string(Comment.contentKey)
-            comment.int(Comment.user_idKey)
-            comment.foreignId(for: Post.self)
+        try database.create(self) { (builder) in
+            builder.id()
+            builder.string(PostComment.contentKey)
+            builder.int(PostComment.user_idKey)
+            builder.foreignId(for: Post.self)
         }
     }
     
@@ -63,25 +63,25 @@ extension Comment: Preparation {
 }
 
 // Convenience of generate model from JSON
-extension Comment: JSONConvertible {
+extension PostComment: JSONConvertible {
     
     convenience init(json: JSON) throws {
-        self.init(content: try json.get(Comment.contentKey),
-                  post_id: try json.get(Comment.post_idKey)
+        self.init(content: try json.get(PostComment.contentKey),
+                  post_id: try json.get(PostComment.post_idKey)
         )}
     
     func makeJSON() throws -> JSON {
         var json = JSON()
-        try json.set(Comment.idKey, id)
-        try json.set(Comment.contentKey, content)
-        try json.set(Comment.post_idKey, post_id)
+        try json.set(PostComment.idKey, id)
+        try json.set(PostComment.contentKey, content)
+        try json.set(PostComment.post_idKey, post_id)
         return json
     }
 }
 
 
-extension Comment: Timestampable {}
+extension PostComment: Timestampable {}
 
 
 // Convenience of returning response
-extension Comment: ResponseRepresentable {}
+extension PostComment: ResponseRepresentable {}
