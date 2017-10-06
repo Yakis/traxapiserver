@@ -41,5 +41,9 @@ extension Config {
         preparations.append(ReviewComment.self)
         preparations.append(ReviewReply.self)
         preparations.append(UserToken.self)
+        preparations.append(OwnerToken.self)
+        preparations.append(Advert.self)
+        preparations.append(AdvertImage.self)
+        preparations.append(AdvertMessage.self)
     }
 }

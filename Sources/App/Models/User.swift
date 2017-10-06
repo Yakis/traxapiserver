@@ -131,11 +131,6 @@ extension User {
         return children()
     }
     
-//    var comments: Children<User, Comment> {
-//        return children()
-//    }
-    
-    
     var tokens: Children<User, UserToken> {
         return children()
     }
