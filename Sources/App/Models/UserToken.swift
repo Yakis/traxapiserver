@@ -8,7 +8,7 @@
 
 import PostgreSQLProvider
 
-final class Token: Model {
+final class UserToken: Model {
     
     let storage = Storage()
     var token: String
@@ -31,27 +31,27 @@ final class Token: Model {
     
     
     init(row: Row) throws {
-        self.token = try row.get(Token.tokenKey)
-        self.user_id = try row.get(Token.user_idKey)
+        self.token = try row.get(UserToken.tokenKey)
+        self.user_id = try row.get(UserToken.user_idKey)
         
     }
     
     
     func makeRow() throws -> Row {
         var row = Row()
-        try row.set(Token.tokenKey, token)
-        try row.set(Token.user_idKey, user_id)
+        try row.set(UserToken.tokenKey, token)
+        try row.set(UserToken.user_idKey, user_id)
         return row
     }
 }
 // For database prepare and revert
-extension Token: Preparation {
+extension UserToken: Preparation {
     
     static func prepare(_ database: Database) throws {
-        try database.create(self) { (token) in
-            token.id()
-            token.string(Token.tokenKey)
-            token.foreignId(for: User.self)
+        try database.create(self) { (builder) in
+            builder.id()
+            builder.string(UserToken.tokenKey)
+            builder.foreignId(for: User.self)
         }
     }
     
@@ -61,21 +61,21 @@ extension Token: Preparation {
 }
 
 // Convenience of generate model from JSON
-extension Token: JSONConvertible {
+extension UserToken: JSONConvertible {
     
     convenience init(json: JSON) throws {
-        self.init(token: try json.get(Token.tokenKey),
-                  user_id: try json.get(Token.user_idKey)
+        self.init(token: try json.get(UserToken.tokenKey),
+                  user_id: try json.get(UserToken.user_idKey)
         )}
     
     func makeJSON() throws -> JSON {
         var json = JSON()
-        try json.set(Token.idKey, id)
-        try json.set(Token.tokenKey, token)
-        try json.set(Token.user_idKey, user_id)
+        try json.set(UserToken.idKey, id)
+        try json.set(UserToken.tokenKey, token)
+        try json.set(UserToken.user_idKey, user_id)
         return json
     }
 }
 
 // Convenience of returning response
-extension Token: ResponseRepresentable {}
+extension UserToken: ResponseRepresentable {}

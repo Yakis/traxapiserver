@@ -15,8 +15,8 @@ final class OwnersController {
     
     
     fileprivate func getOne(request: Request) throws -> ResponseRepresentable {
-        let track = try request.parameters.next(Owner.self)
-        return track
+        let owner = try request.parameters.next(Owner.self)
+        return owner
     }
     
     

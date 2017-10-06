@@ -136,7 +136,7 @@ extension User {
     }
     
     
-    var tokens: Children<User, Token> {
+    var tokens: Children<User, UserToken> {
         return children()
     }
     

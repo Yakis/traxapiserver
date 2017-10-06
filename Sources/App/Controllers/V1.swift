@@ -22,7 +22,6 @@ class V1: RouteCollection {
         let comments = v1.grouped("comments")
         let settings = v1.grouped("settings")
         let images = v1.grouped("images")
-        let tokens = v1.grouped("tokens")
         
         let tracksController = TracksController()
         tracksController.addRoutes(to: tracks)
@@ -45,8 +44,6 @@ class V1: RouteCollection {
         let imagesController = ImagesController()
         imagesController.addRoutes(to: images)
         
-        let tokensController = TokensController()
-        tokensController.addRoutes(to: tokens)
     }
     
 }

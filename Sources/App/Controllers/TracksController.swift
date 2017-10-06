@@ -21,6 +21,15 @@ final class TracksController {
         return try tracks.makeJSON()
     }
     
+    fileprivate func getByOwner(request: Request) throws -> ResponseRepresentable {
+        guard let owner = request.query?["ownerid"]?.int else {
+            fatalError("Track not found!)")
+        }
+        let tracks = try Track.all().filter { $0.owner_id == owner }
+        return try tracks.makeJSON()
+    }
+    
+    
     fileprivate func getOne(request: Request) throws -> ResponseRepresentable {
         let track = try request.parameters.next(Track.self)
         return track
@@ -88,6 +97,7 @@ final class TracksController {
         routeBuilder.patch(Track.parameter, handler: update)
         routeBuilder.delete(Track.parameter, handler: delete)
         routeBuilder.get("", handler: getByName)
+        routeBuilder.get("", handler: getByOwner)
         
         //Child routes
        // routeBuilder.post(Track.parameter, "images", handler: saveImage)

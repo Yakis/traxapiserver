@@ -29,6 +29,6 @@ extension Config {
         preparations.append(Image.self)
         preparations.append(Video.self)
         preparations.append(Review.self)
-        preparations.append(Token.self)
+        preparations.append(UserToken.self)
     }
 }
