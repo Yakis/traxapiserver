@@ -93,3 +93,12 @@ extension Review: Timestampable {}
 
 // Convenience of returning response
 extension Review: ResponseRepresentable {}
+
+
+extension Review {
+    
+    var comments: Children<Review, ReviewComment> {
+        return children()
+    }
+    
+}
