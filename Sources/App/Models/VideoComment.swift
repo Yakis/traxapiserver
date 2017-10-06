@@ -52,7 +52,7 @@ extension VideoComment: Preparation {
         try database.create(self) { (builder) in
             builder.id()
             builder.string(VideoComment.contentKey)
-            builder.int(VideoComment.video_idKey)
+            builder.int(VideoComment.user_idKey)
             builder.foreignId(for: Video.self)
         }
     }
@@ -85,3 +85,13 @@ extension VideoComment: Timestampable {}
 
 // Convenience of returning response
 extension VideoComment: ResponseRepresentable {}
+
+
+extension VideoComment {
+    
+    var replies: Children<VideoComment, VideoReply> {
+        return children()
+    }
+    
+    
+}

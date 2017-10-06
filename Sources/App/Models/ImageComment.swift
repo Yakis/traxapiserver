@@ -52,7 +52,7 @@ extension ImageComment: Preparation {
         try database.create(self) { (builder) in
             builder.id()
             builder.string(ImageComment.contentKey)
-            builder.int(ImageComment.image_idKey)
+            builder.int(ImageComment.user_idKey)
             builder.foreignId(for: Image.self)
         }
     }
@@ -85,3 +85,13 @@ extension ImageComment: Timestampable {}
 
 // Convenience of returning response
 extension ImageComment: ResponseRepresentable {}
+
+
+extension ImageComment {
+    
+    var replies: Children<ImageComment, ImageReply> {
+        return children()
+    }
+    
+    
+}

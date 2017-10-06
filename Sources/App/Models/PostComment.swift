@@ -85,3 +85,13 @@ extension PostComment: Timestampable {}
 
 // Convenience of returning response
 extension PostComment: ResponseRepresentable {}
+
+
+extension PostComment {
+    
+    var replies: Children<PostComment, PostReply> {
+        return children()
+    }
+    
+    
+}

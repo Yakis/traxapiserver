@@ -52,7 +52,7 @@ extension ReviewComment: Preparation {
         try database.create(self) { (builder) in
             builder.id()
             builder.string(ReviewComment.contentKey)
-            builder.int(ReviewComment.review_idKey)
+            builder.int(ReviewComment.owner_idKey)
             builder.foreignId(for: Review.self)
         }
     }
@@ -85,3 +85,13 @@ extension ReviewComment: Timestampable {}
 
 // Convenience of returning response
 extension ReviewComment: ResponseRepresentable {}
+
+
+extension ReviewComment {
+    
+    var replies: Children<ReviewComment, ReviewReply> {
+        return children()
+    }
+    
+    
+}
