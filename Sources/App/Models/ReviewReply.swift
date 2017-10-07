@@ -52,7 +52,8 @@ extension ReviewReply: Preparation {
         try database.create(self) { (builder) in
             builder.id()
             builder.string(ReviewReply.contentKey)
-            builder.int(ReviewReply.user_idKey)
+            //builder.int(ReviewReply.user_idKey)
+            builder.parent(User.self, optional: false)
             builder.foreignId(for: ReviewComment.self)
         }
     }

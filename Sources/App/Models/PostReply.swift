@@ -52,7 +52,8 @@ extension PostReply: Preparation {
         try database.create(self) { (builder) in
             builder.id()
             builder.string(PostReply.contentKey)
-            builder.int(PostReply.user_idKey)
+            //builder.int(PostReply.user_idKey)
+            builder.parent(User.self, optional: false)
             builder.foreignId(for: PostComment.self)
         }
     }

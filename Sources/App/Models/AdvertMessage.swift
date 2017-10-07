@@ -52,7 +52,8 @@ extension AdvertMessage: Preparation {
         try database.create(self) { (builder) in
             builder.id()
             builder.string(AdvertMessage.contentKey)
-            builder.int(AdvertMessage.user_idKey)
+            //builder.int(AdvertMessage.user_idKey)
+            builder.parent(User.self, optional: false)
             builder.foreignId(for: Advert.self)
         }
     }

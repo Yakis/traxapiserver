@@ -52,7 +52,8 @@ extension ImageComment: Preparation {
         try database.create(self) { (builder) in
             builder.id()
             builder.string(ImageComment.contentKey)
-            builder.int(ImageComment.user_idKey)
+            //builder.int(ImageComment.user_idKey)
+            builder.parent(User.self, optional: false)
             builder.foreignId(for: Image.self)
         }
     }

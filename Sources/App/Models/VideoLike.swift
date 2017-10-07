@@ -49,7 +49,8 @@ extension VideoLike: Preparation {
     static func prepare(_ database: Database) throws {
         try database.create(self) { (builder) in
             builder.id()
-            builder.int(VideoLike.user_idKey)
+            //builder.int(VideoLike.user_idKey)
+            builder.parent(User.self, optional: false)
             builder.foreignId(for: Video.self)
         }
     }

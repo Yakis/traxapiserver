@@ -13,6 +13,7 @@ final class PostComment: Model {
     let storage = Storage()
     var content: String
     var post_id: Int
+    var user_id: Int
     
     
     // Use these keys instead of magic strings
@@ -23,10 +24,11 @@ final class PostComment: Model {
     
     
     init(content: String,
-         post_id: Int
+         post_id: Int, user_id: Int
         ) {
         self.content = content
         self.post_id = post_id
+        self.user_id = user_id
         
     }
     
@@ -34,6 +36,7 @@ final class PostComment: Model {
     init(row: Row) throws {
         self.content = try row.get(PostComment.contentKey)
         self.post_id = try row.get(PostComment.post_idKey)
+        self.user_id = try row.get(PostComment.user_idKey)
         
     }
     
@@ -42,6 +45,7 @@ final class PostComment: Model {
         var row = Row()
         try row.set(PostComment.contentKey, content)
         try row.set(PostComment.post_idKey, post_id)
+        try row.set(PostComment.user_idKey, user_id)
         return row
     }
 }
@@ -51,8 +55,9 @@ extension PostComment: Preparation {
     static func prepare(_ database: Database) throws {
         try database.create(self) { (builder) in
             builder.id()
-            builder.string(PostComment.contentKey)
-            builder.int(PostComment.user_idKey)
+            builder.string(PostComment.contentKey, length: 1500)
+            //builder.int(PostComment.user_idKey)
+            builder.parent(User.self, optional: false)
             builder.foreignId(for: Post.self)
         }
     }
@@ -67,7 +72,8 @@ extension PostComment: JSONConvertible {
     
     convenience init(json: JSON) throws {
         self.init(content: try json.get(PostComment.contentKey),
-                  post_id: try json.get(PostComment.post_idKey)
+                  post_id: try json.get(PostComment.post_idKey),
+                  user_id: try json.get(PostComment.user_idKey)
         )}
     
     func makeJSON() throws -> JSON {
@@ -75,6 +81,7 @@ extension PostComment: JSONConvertible {
         try json.set(PostComment.idKey, id)
         try json.set(PostComment.contentKey, content)
         try json.set(PostComment.post_idKey, post_id)
+        try json.set(PostComment.user_idKey, user_id)
         return json
     }
 }

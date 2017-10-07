@@ -52,7 +52,8 @@ extension ImageReply: Preparation {
         try database.create(self) { (builder) in
             builder.id()
             builder.string(ImageReply.contentKey)
-            builder.int(ImageReply.user_idKey)
+            //builder.int(ImageReply.user_idKey)
+            builder.parent(User.self, optional: false)
             builder.foreignId(for: ImageComment.self)
         }
     }

@@ -135,4 +135,53 @@ extension User {
         return children()
     }
     
+    
+    // Parent of:
+    var postComments: Children<User, PostComment> {
+        return children()
+    }
+    
+    var postReply: Children<User, PostReply> {
+        return children()
+    }
+    
+    var postLike: Children<User, PostLike> {
+        return children()
+    }
+    
+    
+    
+    var imageComments: Children<User, ImageComment> {
+        return children()
+    }
+    
+    var imageReply: Children<User, ImageReply> {
+        return children()
+    }
+    
+    var imageLike: Children<User, ImageLike> {
+        return children()
+    }
+    
+    
+    
+    var videoComments: Children<User, VideoComment> {
+        return children()
+    }
+    
+    var videoReply: Children<User, VideoReply> {
+        return children()
+    }
+    
+    var videoLike: Children<User, VideoLike> {
+        return children()
+    }
+    
+
+    
+    var reviewReply: Children<User, ReviewReply> {
+        return children()
+    }
+    
+    
 }

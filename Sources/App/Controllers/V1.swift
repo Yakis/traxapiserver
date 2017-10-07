@@ -19,7 +19,7 @@ class V1: RouteCollection {
         let owners = v1.grouped("owners")
         let users = v1.grouped("users")
         let posts = v1.grouped("posts")
-        let comments = v1.grouped("comments")
+        let postComments = v1.grouped("postcomments")
         let settings = v1.grouped("settings")
         let images = v1.grouped("images")
         
@@ -36,7 +36,7 @@ class V1: RouteCollection {
         postsController.addRoutes(to: posts)
         
         let postsCommentsController = PostsCommentsController()
-        postsCommentsController.addRoutes(to: comments)
+        postsCommentsController.addRoutes(to: postComments)
         
         let settingsController = SettingsController()
         settingsController.addRoutes(to: settings)

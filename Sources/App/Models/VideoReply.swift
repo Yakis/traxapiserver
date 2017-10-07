@@ -52,7 +52,8 @@ extension VideoReply: Preparation {
         try database.create(self) { (builder) in
             builder.id()
             builder.string(VideoReply.contentKey)
-            builder.int(VideoReply.user_idKey)
+            //builder.int(VideoReply.user_idKey)
+            builder.parent(User.self, optional: false)
             builder.foreignId(for: VideoComment.self)
         }
     }

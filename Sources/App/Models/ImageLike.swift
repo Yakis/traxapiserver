@@ -49,7 +49,8 @@ extension ImageLike: Preparation {
     static func prepare(_ database: Database) throws {
         try database.create(self) { (builder) in
             builder.id()
-            builder.int(ImageLike.user_idKey)
+            //builder.int(ImageLike.user_idKey)
+            builder.parent(User.self, optional: false)
             builder.foreignId(for: Image.self)
         }
     }

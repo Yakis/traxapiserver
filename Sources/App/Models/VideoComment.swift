@@ -52,7 +52,8 @@ extension VideoComment: Preparation {
         try database.create(self) { (builder) in
             builder.id()
             builder.string(VideoComment.contentKey)
-            builder.int(VideoComment.user_idKey)
+            //builder.int(VideoComment.user_idKey)
+            builder.parent(User.self, optional: false)
             builder.foreignId(for: Video.self)
         }
     }

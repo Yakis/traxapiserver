@@ -49,7 +49,8 @@ extension PostLike: Preparation {
     static func prepare(_ database: Database) throws {
         try database.create(self) { (builder) in
             builder.id()
-            builder.int(PostLike.user_idKey)
+            //builder.int(PostLike.user_idKey)
+            builder.parent(User.self, optional: false)
             builder.foreignId(for: Post.self)
         }
     }

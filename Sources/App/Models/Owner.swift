@@ -110,4 +110,9 @@ extension Owner {
         return children()
     }
     
+    
+    var reviewComments: Children<Owner, ReviewComment> {
+        return children()
+    }
+    
 }
