@@ -9,6 +9,7 @@
 import PostgreSQLProvider
 
 final class PostsCommentsController {
+    
     fileprivate func getAll(request: Request) throws -> ResponseRepresentable {
         return try PostComment.all().makeJSON()
     }

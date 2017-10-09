@@ -22,6 +22,7 @@ final class Track: Model {
     var child_friendly: Bool
     var rating: Double
     var owner_id: Int
+    var featured: Int
     
     
     // Use these keys instead of magic strings
@@ -38,6 +39,7 @@ final class Track: Model {
     static let ratingKey = "rating"
     static let imagesKey = "images"
     static let ownerIdKey = "owner_id"
+    static let featuredKey = "featured"
     
     init(name: String,
          adress: String,
@@ -49,7 +51,8 @@ final class Track: Model {
          prices: String,
          child_friendly: Bool,
          rating: Double,
-         owner_id: Int
+         owner_id: Int,
+         featured: Int
         ) {
         self.name = name
         self.adress = adress
@@ -62,6 +65,7 @@ final class Track: Model {
         self.child_friendly = child_friendly
         self.rating = rating
         self.owner_id = owner_id
+        self.featured = featured
     }
     
     
@@ -77,6 +81,7 @@ final class Track: Model {
         self.child_friendly = try row.get(Track.childFriendlyKey)
         self.rating = try row.get(Track.ratingKey)
         self.owner_id = try row.get(Track.ownerIdKey)
+        self.featured = try row.get(Track.featuredKey)
     }
     
     
@@ -93,6 +98,7 @@ final class Track: Model {
         try row.set(Track.childFriendlyKey, child_friendly)
         try row.set(Track.ratingKey, rating)
         try row.set(Track.ownerIdKey, owner_id)
+        try row.set(Track.featuredKey, featured)
         return row
     }
 }
@@ -112,6 +118,7 @@ extension Track: Preparation {
             builder.string(Track.pricesKey)
             builder.bool(Track.childFriendlyKey)
             builder.double(Track.ratingKey)
+            builder.int(Track.featuredKey)
             builder.foreignId(for: Owner.self)
         }
     }
@@ -135,7 +142,8 @@ extension Track: JSONConvertible {
                   prices: try json.get(Track.pricesKey),
                   child_friendly: try json.get(Track.childFriendlyKey),
                   rating: try json.get(Track.ratingKey),
-                  owner_id: try json.get(Track.ownerIdKey))
+                  owner_id: try json.get(Track.ownerIdKey),
+                  featured: try json.get(Track.featuredKey))
     }
     
     func makeJSON() throws -> JSON {
@@ -153,6 +161,7 @@ extension Track: JSONConvertible {
         try json.set(Track.ratingKey, rating)
         try json.set(Track.ownerIdKey, owner_id)
         try json.set(Track.imagesKey, images.all())
+        try json.set(Track.featuredKey, featured)
         return json
     }
 }
