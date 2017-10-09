@@ -57,7 +57,7 @@ extension Review: Preparation {
         try database.create(self) { (builder) in
             builder.id()
             builder.int(Review.starsKey)
-            builder.string(Review.contentKey)
+            builder.string(Review.contentKey, length: 1500)
             builder.int(Review.userIdKey)
             builder.foreignId(for: Track.self)
         }

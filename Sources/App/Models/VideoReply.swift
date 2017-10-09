@@ -51,7 +51,7 @@ extension VideoReply: Preparation {
     static func prepare(_ database: Database) throws {
         try database.create(self) { (builder) in
             builder.id()
-            builder.string(VideoReply.contentKey)
+            builder.string(VideoReply.contentKey, length: 1500)
             //builder.int(VideoReply.user_idKey)
             builder.parent(User.self, optional: false)
             builder.foreignId(for: VideoComment.self)

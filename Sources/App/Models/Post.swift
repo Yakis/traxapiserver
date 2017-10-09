@@ -56,7 +56,7 @@ extension Post: Preparation {
     static func prepare(_ database: Database) throws {
         try database.create(self) { (post) in
             post.id()
-            post.string(Post.contentKey)
+            post.string(Post.contentKey, length: 1500)
             post.string(Post.imageKey)
             post.foreignId(for: Track.self)
         }

@@ -51,7 +51,7 @@ extension PostReply: Preparation {
     static func prepare(_ database: Database) throws {
         try database.create(self) { (builder) in
             builder.id()
-            builder.string(PostReply.contentKey)
+            builder.string(PostReply.contentKey, length: 1500)
             //builder.int(PostReply.user_idKey)
             builder.parent(User.self, optional: false)
             builder.foreignId(for: PostComment.self)

@@ -51,7 +51,7 @@ extension ImageComment: Preparation {
     static func prepare(_ database: Database) throws {
         try database.create(self) { (builder) in
             builder.id()
-            builder.string(ImageComment.contentKey)
+            builder.string(ImageComment.contentKey, length: 1500)
             //builder.int(ImageComment.user_idKey)
             builder.parent(User.self, optional: false)
             builder.foreignId(for: Image.self)

@@ -57,7 +57,7 @@ extension Event: Preparation {
     static func prepare(_ database: Database) throws {
         try database.create(self) { (builder) in
             builder.id()
-            builder.string(Event.contentKey)
+            builder.string(Event.contentKey, length: 1500)
             builder.string(Event.event_dateKey)
             builder.foreignId(for: Track.self)
         }

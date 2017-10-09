@@ -51,7 +51,7 @@ extension ReviewComment: Preparation {
     static func prepare(_ database: Database) throws {
         try database.create(self) { (builder) in
             builder.id()
-            builder.string(ReviewComment.contentKey)
+            builder.string(ReviewComment.contentKey, length: 1500)
             //builder.int(ReviewComment.owner_idKey)
             builder.parent(Owner.self, optional: false)
             builder.foreignId(for: Review.self)
