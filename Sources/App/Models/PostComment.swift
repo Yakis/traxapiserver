@@ -82,6 +82,8 @@ extension PostComment: JSONConvertible {
         try json.set(PostComment.contentKey, content)
         try json.set(PostComment.post_idKey, post_id)
         try json.set(PostComment.user_idKey, user_id)
+        try json.set(PostComment.createdAtKey, self.formattedCreatedAt)
+        try json.set(PostComment.updatedAtKey, self.formattedUpdatedAt)
         return json
     }
 }

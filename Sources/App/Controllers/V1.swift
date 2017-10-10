@@ -20,8 +20,11 @@ class V1: RouteCollection {
         let users = v1.grouped("users")
         let posts = v1.grouped("posts")
         let postComments = v1.grouped("postcomments")
+        let postreplies = v1.grouped("postreplies")
         let settings = v1.grouped("settings")
         let images = v1.grouped("images")
+        let imageComments = v1.grouped("imagecomments")
+        let imageReplies = v1.grouped("imagereplies")
         
         let tracksController = TracksController()
         tracksController.addRoutes(to: tracks)
@@ -35,14 +38,23 @@ class V1: RouteCollection {
         let postsController = PostsController()
         postsController.addRoutes(to: posts)
         
-        let postsCommentsController = PostsCommentsController()
-        postsCommentsController.addRoutes(to: postComments)
+        let postCommentsController = PostCommentsController()
+        postCommentsController.addRoutes(to: postComments)
+        
+        let postRepliesController = PostRepliesController()
+        postRepliesController.addRoutes(to: postreplies)
         
         let settingsController = SettingsController()
         settingsController.addRoutes(to: settings)
         
         let imagesController = ImagesController()
         imagesController.addRoutes(to: images)
+        
+        let imageCommentsController = ImageCommentsController()
+        imageCommentsController.addRoutes(to: imageComments)
+        
+        let imageRepliesController = ImageRepliesController()
+        imageRepliesController.addRoutes(to: imageReplies)
         
     }
     

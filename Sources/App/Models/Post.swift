@@ -82,6 +82,8 @@ extension Post: JSONConvertible {
         try json.set(Post.contentKey, content)
         try json.set(Post.imageKey, image)
         try json.set(Post.track_idKey, track_id)
+        try json.set(Post.createdAtKey, self.formattedCreatedAt)
+        try json.set(Post.updatedAtKey, self.formattedUpdatedAt)
         return json
     }
 }

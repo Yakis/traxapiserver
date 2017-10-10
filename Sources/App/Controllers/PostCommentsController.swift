@@ -8,7 +8,7 @@
 
 import PostgreSQLProvider
 
-final class PostsCommentsController {
+final class PostCommentsController {
     
     fileprivate func getAll(request: Request) throws -> ResponseRepresentable {
         return try PostComment.all().makeJSON()
@@ -16,8 +16,8 @@ final class PostsCommentsController {
     
     
     fileprivate func getOne(request: Request) throws -> ResponseRepresentable {
-        let track = try request.parameters.next(PostComment.self)
-        return track
+        let comment = try request.parameters.next(PostComment.self)
+        return comment
     }
     
     
@@ -49,17 +49,17 @@ final class PostsCommentsController {
     
     fileprivate func update(request: Request) throws -> ResponseRepresentable {
         guard let json = request.json else { throw Abort.badRequest }
-        let track = try PostComment(json: json)
-        try track.save()
-        return track
+        let comment = try PostComment(json: json)
+        try comment.save()
+        return comment
     }
     
     
     fileprivate func delete(request: Request) throws -> ResponseRepresentable {
         guard let json = request.json else { throw Abort.badRequest }
-        let track = try PostComment(json: json)
-        try track.delete()
-        return track
+        let comment = try PostComment(json: json)
+        try comment.delete()
+        return comment
     }
     
     

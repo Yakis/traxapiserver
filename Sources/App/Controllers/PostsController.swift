@@ -18,32 +18,32 @@ final class PostsController {
     
     
     fileprivate func getOne(request: Request) throws -> ResponseRepresentable {
-        let track = try request.parameters.next(Post.self)
-        return track
+        let post = try request.parameters.next(Post.self)
+        return post
     }
     
     
     fileprivate func create(request: Request) throws -> ResponseRepresentable {
         guard let json = request.json else { throw Abort.badRequest }
-        let track = try Post(json: json)
-        try track.save()
-        return track
+        let post = try Post(json: json)
+        try post.save()
+        return post
     }
     
     
     fileprivate func update(request: Request) throws -> ResponseRepresentable {
         guard let json = request.json else { throw Abort.badRequest }
-        let track = try Post(json: json)
-        try track.save()
-        return track
+        let post = try Post(json: json)
+        try post.save()
+        return post
     }
     
     
     fileprivate func delete(request: Request) throws -> ResponseRepresentable {
         guard let json = request.json else { throw Abort.badRequest }
-        let track = try Post(json: json)
-        try track.delete()
-        return track
+        let post = try Post(json: json)
+        try post.delete()
+        return post
     }
     
     
