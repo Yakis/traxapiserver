@@ -1,55 +1,55 @@
 //
-//  ImagesController.swift
+//  VideoController.swift
 //  traxapi
 //
-//  Created by Mugurel Moscaliuc on 23/09/2017.
+//  Created by Mugurel Moscaliuc on 10/10/2017.
 //
 //
 
 import PostgreSQLProvider
 
-final class ImagesController {
+final class VideosController {
     fileprivate func getAll(request: Request) throws -> ResponseRepresentable {
-        return try Image.all().makeJSON()
+        return try Video.all().makeJSON()
     }
     
     
     fileprivate func getOne(request: Request) throws -> ResponseRepresentable {
-        let track = try request.parameters.next(Image.self)
-        return track
+        let video = try request.parameters.next(Video.self)
+        return video
     }
     
     
     fileprivate func create(request: Request) throws -> ResponseRepresentable {
         guard let json = request.json else { throw Abort.badRequest }
-        let track = try Image(json: json)
-        try track.save()
-        return track
+        let video = try Video(json: json)
+        try video.save()
+        return video
     }
     
     
     fileprivate func update(request: Request) throws -> ResponseRepresentable {
         guard let json = request.json else { throw Abort.badRequest }
-        let track = try Image(json: json)
-        try track.save()
-        return track
+        let video = try Video(json: json)
+        try video.save()
+        return video
     }
     
     
     fileprivate func delete(request: Request) throws -> ResponseRepresentable {
         guard let json = request.json else { throw Abort.badRequest }
-        let track = try Image(json: json)
-        try track.delete()
-        return track
+        let video = try Video(json: json)
+        try video.delete()
+        return video
     }
     
     
     func addRoutes(to routeBuilder: RouteBuilder) {
         routeBuilder.get("all", handler: getAll)
         routeBuilder.post("create", handler: create)
-        routeBuilder.get(Image.parameter, handler: getOne)
-        routeBuilder.patch(Image.parameter, handler: update)
-        routeBuilder.delete(Image.parameter, handler: delete)
+        routeBuilder.get(Video.parameter, handler: getOne)
+        routeBuilder.patch(Video.parameter, handler: update)
+        routeBuilder.delete(Video.parameter, handler: delete)
     }
     
     

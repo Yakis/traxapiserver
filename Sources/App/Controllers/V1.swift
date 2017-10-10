@@ -25,6 +25,9 @@ class V1: RouteCollection {
         let images = v1.grouped("images")
         let imageComments = v1.grouped("imagecomments")
         let imageReplies = v1.grouped("imagereplies")
+        let videos = v1.grouped("videos")
+        let videoComments = v1.grouped("videocomments")
+        let videoReplies = v1.grouped("videoreplies")
         
         let tracksController = TracksController()
         tracksController.addRoutes(to: tracks)
@@ -55,6 +58,15 @@ class V1: RouteCollection {
         
         let imageRepliesController = ImageRepliesController()
         imageRepliesController.addRoutes(to: imageReplies)
+        
+        let videosController = VideosController()
+        videosController.addRoutes(to: videos)
+        
+        let videoCommentsController = VideoCommentsController()
+        videoCommentsController.addRoutes(to: videoComments)
+        
+        let videoRepliesController = VideoRepliesController()
+        videoRepliesController.addRoutes(to: videoReplies)
         
     }
     
