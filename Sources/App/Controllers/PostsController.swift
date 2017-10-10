@@ -9,12 +9,10 @@
 import PostgreSQLProvider
 
 final class PostsController {
+    
     fileprivate func getAll(request: Request) throws -> ResponseRepresentable {
         return try Post.all().makeJSON()
     }
-    
-    
-    
     
     
     fileprivate func getOne(request: Request) throws -> ResponseRepresentable {
@@ -47,12 +45,57 @@ final class PostsController {
     }
     
     
+    fileprivate func getLikesCount(request: Request) throws -> ResponseRepresentable {
+        guard let post = request.query?["id"]?.int else {
+            fatalError("Post not found!)")
+        }
+        let likes = try PostLike.all().filter { $0.post_id == post }
+        return "\(likes.count)"
+    }
+    
+    
+    fileprivate func isLiked(request: Request) throws -> ResponseRepresentable {
+        guard let user = request.query?["user_id"]?.int else {
+            fatalError("Post not found!)")
+        }
+        guard let post = request.query?["post_id"]?.int else {
+            fatalError("Post not found!)")
+        }
+        let likes = try PostLike.all().filter { $0.post_id == post && $0.user_id == user }
+        if likes.count > 0 {
+            var json = JSON()
+            try json.set("isLiked", true)
+            return json
+        } else {
+            var json = JSON()
+            try json.set("isLiked", false)
+            return json
+        }
+    }
+    
+    
+    fileprivate func like(request: Request) throws -> ResponseRepresentable {
+        guard let json = request.json else { throw Abort.badRequest }
+        let like = try PostLike(json: json)
+        try like.save()
+        return like
+    }
+    
+    
     func addRoutes(to routeBuilder: RouteBuilder) {
         routeBuilder.get("all", handler: getAll)
         routeBuilder.post("create", handler: create)
         routeBuilder.get(Post.parameter, handler: getOne)
         routeBuilder.patch(Post.parameter, handler: update)
         routeBuilder.delete(Post.parameter, handler: delete)
+        
+        routeBuilder.post("likes", "create", handler: like)
+        
+        // /api/v1/posts/likes/post?id=1
+        routeBuilder.get("likes", "post", handler: getLikesCount)
+        
+        // /api/v1/posts/likes?user_id=1&post_id=1
+        routeBuilder.get("likes", handler: isLiked)
     }
     
     
