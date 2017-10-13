@@ -24,8 +24,14 @@ final class PostsController {
     fileprivate func create(request: Request) throws -> ResponseRepresentable {
         guard let json = request.json else { throw Abort.badRequest }
         let post = try Post(json: json)
-        try post.save()
-        return post
+        guard let track = try Track.find(post.track_id) else {throw Abort.badRequest}
+        guard let user = try User.find(track.user_id) else {throw Abort.badRequest}
+        switch user.userType {
+        case "owner":
+            try post.save()
+            return post
+        default: throw Abort.unauthorized
+        }
     }
     
     
