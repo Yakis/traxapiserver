@@ -95,6 +95,7 @@ final class PostsController {
         routeBuilder.patch(Post.parameter, handler: update)
         routeBuilder.delete(Post.parameter, handler: delete)
         
+        // /api/v1/posts/likes/create
         routeBuilder.post("likes", "create", handler: like)
         
         // /api/v1/posts/likes/post?id=1
