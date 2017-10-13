@@ -21,7 +21,7 @@ final class Track: Model {
     var prices: String
     var child_friendly: Bool
     var rating: Double
-    var owner_id: Int
+    var user_id: Int
     var featured: Int
     
     
@@ -38,8 +38,9 @@ final class Track: Model {
     static let childFriendlyKey = "child_friendly"
     static let ratingKey = "rating"
     static let imagesKey = "images"
-    static let ownerIdKey = "owner_id"
+    static let userIdKey = "user_id"
     static let featuredKey = "featured"
+    static let user_idKey = "user_id"
     
     init(name: String,
          adress: String,
@@ -51,7 +52,7 @@ final class Track: Model {
          prices: String,
          child_friendly: Bool,
          rating: Double,
-         owner_id: Int,
+         user_id: Int,
          featured: Int
         ) {
         self.name = name
@@ -64,7 +65,7 @@ final class Track: Model {
         self.prices = prices
         self.child_friendly = child_friendly
         self.rating = rating
-        self.owner_id = owner_id
+        self.user_id = user_id
         self.featured = featured
     }
     
@@ -80,7 +81,7 @@ final class Track: Model {
         self.prices = try row.get(Track.pricesKey)
         self.child_friendly = try row.get(Track.childFriendlyKey)
         self.rating = try row.get(Track.ratingKey)
-        self.owner_id = try row.get(Track.ownerIdKey)
+        self.user_id = try row.get(Track.user_idKey)
         self.featured = try row.get(Track.featuredKey)
     }
     
@@ -97,7 +98,7 @@ final class Track: Model {
         try row.set(Track.pricesKey, prices)
         try row.set(Track.childFriendlyKey, child_friendly)
         try row.set(Track.ratingKey, rating)
-        try row.set(Track.ownerIdKey, owner_id)
+        try row.set(Track.user_idKey, user_id)
         try row.set(Track.featuredKey, featured)
         return row
     }
@@ -119,7 +120,7 @@ extension Track: Preparation {
             builder.bool(Track.childFriendlyKey)
             builder.double(Track.ratingKey)
             builder.int(Track.featuredKey)
-            builder.foreignId(for: Owner.self)
+            builder.foreignId(for: User.self)
         }
     }
     
@@ -142,7 +143,7 @@ extension Track: JSONConvertible {
                   prices: try json.get(Track.pricesKey),
                   child_friendly: try json.get(Track.childFriendlyKey),
                   rating: try json.get(Track.ratingKey),
-                  owner_id: try json.get(Track.ownerIdKey),
+                  user_id: try json.get(Track.user_idKey),
                   featured: try json.get(Track.featuredKey))
     }
     
@@ -159,7 +160,7 @@ extension Track: JSONConvertible {
         try json.set(Track.pricesKey, prices)
         try json.set(Track.childFriendlyKey, child_friendly)
         try json.set(Track.ratingKey, rating)
-        try json.set(Track.ownerIdKey, owner_id)
+        try json.set(Track.user_idKey, user_id)
         try json.set(Track.imagesKey, images.all())
         try json.set(Track.featuredKey, featured)
         return json

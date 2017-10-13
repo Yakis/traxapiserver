@@ -21,11 +21,11 @@ final class TracksController {
         return try tracks.makeJSON()
     }
     
-    fileprivate func getByOwner(request: Request) throws -> ResponseRepresentable {
-        guard let owner = request.query?["ownerid"]?.int else {
+    fileprivate func getByUser(request: Request) throws -> ResponseRepresentable {
+        guard let user = request.query?["userid"]?.int else {
             fatalError("Track not found!)")
         }
-        let tracks = try Track.all().filter { $0.owner_id == owner }
+        let tracks = try Track.all().filter { $0.user_id == user }
         return try tracks.makeJSON()
     }
     
@@ -40,12 +40,17 @@ final class TracksController {
         guard let json = request.json else { throw Abort.badRequest }
         guard let images = json[Image.imagesKey]?.array else { throw Abort.badRequest }
         let track = try Track(json: json)
-        try track.save()
-        guard let trackId = track.id?.int else { throw Abort.badRequest }
-        for imageUrl in images {
-        try saveImage(for: trackId, imageUrl: imageUrl.string!)
+        guard let user = try User.find(track.user_id) else {throw Abort.badRequest}
+        switch user.userType {
+        case "owner":
+            try track.save()
+            guard let trackId = track.id?.int else { throw Abort.badRequest }
+            for imageUrl in images {
+                try saveImage(for: trackId, imageUrl: imageUrl.string!)
+            }
+            return track
+        default: throw Abort.unauthorized
         }
-        return track
     }
     
     
@@ -59,7 +64,7 @@ final class TracksController {
         track.latitude = newTrack.latitude
         track.longitude = newTrack.longitude
         track.opening_times = newTrack.opening_times
-        track.owner_id = newTrack.owner_id
+        track.user_id = newTrack.user_id
         track.postcode = newTrack.postcode
         track.prices = newTrack.prices
         track.rating = newTrack.rating
@@ -97,7 +102,9 @@ final class TracksController {
         routeBuilder.patch(Track.parameter, handler: update)
         routeBuilder.delete(Track.parameter, handler: delete)
         routeBuilder.get("", handler: getByName)
-        routeBuilder.get("", handler: getByOwner)
+        
+        // /tracks/userid=1
+        routeBuilder.get("", handler: getByUser)
         
         //Child routes
        // routeBuilder.post(Track.parameter, "images", handler: saveImage)

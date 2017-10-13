@@ -15,9 +15,12 @@ final class User: Model {
     var email: String
     var firstName: String
     var lastName: String
+    var contactNumber: String
     var postcode: String
     var avatar: String
-    var facebookUid: String
+    var deviceToken: String
+    var firebaseUid: String
+    var userType: String
     
     
     // Use these keys instead of magic strings
@@ -26,18 +29,24 @@ final class User: Model {
     static let emailKey = "email"
     static let firstNameKey = "first_name"
     static let lastNameKey = "last_name"
+    static let contactNumberKey = "contact_number"
     static let postcodeKey = "postcode"
     static let avatarKey = "avatar"
-    static let facebookUidKey = "facebook_uid"
+    static let firebaseUidKey = "firebase_uid"
+    static let userTypeKey = "user_type"
+    static let deviceTokenKey = "device_token"
     
     
     init(username: String,
          email: String,
          firstName: String,
          lastName: String,
+         contactNumber: String,
          postcode: String,
          avatar: String,
-         facebookUid: String
+         deviceToken: String,
+         firebaseUid: String,
+         userType: String
         ) {
         self.username = username
         self.email = email
@@ -45,7 +54,10 @@ final class User: Model {
         self.lastName = lastName
         self.postcode = postcode
         self.avatar = avatar
-        self.facebookUid = facebookUid
+        self.deviceToken = deviceToken
+        self.firebaseUid = firebaseUid
+        self.contactNumber = contactNumber
+        self.userType = userType
         
     }
     
@@ -57,7 +69,10 @@ final class User: Model {
         self.lastName = try row.get(User.lastNameKey)
         self.postcode = try row.get(User.postcodeKey)
         self.avatar = try row.get(User.avatarKey)
-        self.facebookUid = try row.get(User.facebookUidKey)
+        self.deviceToken = try row.get(User.deviceTokenKey)
+        self.firebaseUid = try row.get(User.firebaseUidKey)
+        self.contactNumber = try row.get(User.contactNumberKey)
+        self.userType = try row.get(User.userTypeKey)
         
     }
     
@@ -70,7 +85,10 @@ final class User: Model {
         try row.set(User.lastNameKey, lastName)
         try row.set(User.postcodeKey, postcode)
         try row.set(User.avatarKey, avatar)
-        try row.set(User.facebookUidKey, facebookUid)
+        try row.set(User.deviceTokenKey, deviceToken)
+        try row.set(User.firebaseUidKey, firebaseUid)
+        try row.set(User.contactNumberKey, contactNumber)
+        try row.set(User.userTypeKey, userType)
         return row
     }
 }
@@ -86,7 +104,10 @@ extension User: Preparation {
             user.string(User.lastNameKey)
             user.string(User.postcodeKey)
             user.string(User.avatarKey)
-            user.string(User.facebookUidKey)
+            user.string(User.deviceTokenKey)
+            user.string(User.firebaseUidKey)
+            user.string(User.contactNumberKey)
+            user.string(User.userTypeKey)
         }
     }
     
@@ -103,9 +124,12 @@ extension User: JSONConvertible {
                   email: try json.get(User.emailKey),
                   firstName: try json.get(User.firstNameKey),
                   lastName: try json.get(User.lastNameKey),
+                  contactNumber: try json.get(User.contactNumberKey),
                   postcode: try json.get(User.postcodeKey),
                   avatar: try json.get(User.avatarKey),
-                  facebookUid: try json.get(User.facebookUidKey)
+                  deviceToken: try json.get(User.deviceTokenKey),
+                  firebaseUid: try json.get(User.firebaseUidKey),
+                  userType: try json.get(User.userTypeKey)
         )}
     
     func makeJSON() throws -> JSON {
@@ -117,7 +141,10 @@ extension User: JSONConvertible {
         try json.set(User.lastNameKey, lastName)
         try json.set(User.postcodeKey, postcode)
         try json.set(User.avatarKey, avatar)
-        try json.set(User.facebookUidKey, facebookUid)
+        try json.set(User.deviceTokenKey, deviceToken)
+        try json.set(User.firebaseUidKey, firebaseUid)
+        try json.set(User.contactNumberKey, contactNumber)
+        try json.set(User.userTypeKey, userType)
         
         return json
     }
@@ -127,6 +154,17 @@ extension User: JSONConvertible {
 extension User: ResponseRepresentable {}
 
 extension User {
+    
+    var tracks: Children<User, Track> {
+        return children()
+    }
+    
+    
+    var reviewComments: Children<User, ReviewComment> {
+        return children()
+    }
+    
+    
     var settings: Children<User, Setting> {
         return children()
     }

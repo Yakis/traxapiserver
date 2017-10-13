@@ -16,7 +16,6 @@ class V1: RouteCollection {
         let v1 = builder.grouped("api", "v1")
         
         let tracks = v1.grouped("tracks")
-        let owners = v1.grouped("owners")
         let users = v1.grouped("users")
         let posts = v1.grouped("posts")
         let postComments = v1.grouped("postcomments")
@@ -31,9 +30,6 @@ class V1: RouteCollection {
         
         let tracksController = TracksController()
         tracksController.addRoutes(to: tracks)
-        
-        let ownersController = OwnersController()
-        ownersController.addRoutes(to: owners)
         
         let usersController = UsersController()
         usersController.addRoutes(to: users)

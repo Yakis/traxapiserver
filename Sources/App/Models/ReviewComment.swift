@@ -19,7 +19,7 @@ final class ReviewComment: Model {
     static let idKey = "id"
     static let contentKey = "content"
     static let review_idKey = "review_id"
-    static let owner_idKey = "owner_id"
+    static let user_idKey = "user_id"
     
     
     init(content: String,
@@ -52,8 +52,7 @@ extension ReviewComment: Preparation {
         try database.create(self) { (builder) in
             builder.id()
             builder.string(ReviewComment.contentKey, length: 1500)
-            //builder.int(ReviewComment.owner_idKey)
-            builder.parent(Owner.self, optional: false)
+            builder.parent(User.self, optional: false)
             builder.foreignId(for: Review.self)
         }
     }
