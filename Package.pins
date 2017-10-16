@@ -2,6 +2,18 @@
   "autoPin": true,
   "pins": [
     {
+      "package": "Auth",
+      "reason": null,
+      "repositoryURL": "https://github.com/vapor/auth.git",
+      "version": "1.2.1"
+    },
+    {
+      "package": "AuthProvider",
+      "reason": null,
+      "repositoryURL": "https://github.com/vapor/auth-provider.git",
+      "version": "1.2.0"
+    },
+    {
       "package": "BCrypt",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/bcrypt.git",
@@ -56,22 +68,34 @@
       "version": "2.2.1"
     },
     {
+      "package": "FireBase-Auth-AmanGarry",
+      "reason": null,
+      "repositoryURL": "https://github.com/Aman-US-Punjabi/FireBase-Auth-AmanGarry.git",
+      "version": "0.2.2"
+    },
+    {
       "package": "Fluent",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/fluent.git",
-      "version": "2.4.0"
+      "version": "2.4.1"
     },
     {
       "package": "FluentProvider",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/fluent-provider.git",
-      "version": "1.1.1"
+      "version": "1.2.0"
     },
     {
       "package": "JSON",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/json.git",
-      "version": "2.2.0"
+      "version": "2.2.1"
+    },
+    {
+      "package": "JWT",
+      "reason": null,
+      "repositoryURL": "https://github.com/vapor/jwt.git",
+      "version": "2.3.0"
     },
     {
       "package": "Multipart",
@@ -95,13 +119,13 @@
       "package": "PostgreSQLDriver",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/postgresql-driver.git",
-      "version": "2.0.1"
+      "version": "2.1.0"
     },
     {
       "package": "PostgreSQLProvider",
       "reason": null,
       "repositoryURL": "https://github.com/vapor-community/postgresql-provider.git",
-      "version": "2.0.0"
+      "version": "2.1.0"
     },
     {
       "package": "Random",
@@ -113,13 +137,13 @@
       "package": "Routing",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/routing.git",
-      "version": "2.1.0"
+      "version": "2.2.0"
     },
     {
       "package": "SQLite",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/sqlite.git",
-      "version": "2.2.0"
+      "version": "2.3.1"
     },
     {
       "package": "Sockets",
