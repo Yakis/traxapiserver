@@ -29,10 +29,21 @@ final class UsersController {
     
     
     fileprivate func update(request: Request) throws -> ResponseRepresentable {
+        let user = try request.parameters.next(User.self)
         guard let json = request.json else { throw Abort.badRequest }
-        let track = try User(json: json)
-        try track.save()
-        return track
+        let newUser = try User(json: json)
+        user.username = newUser.username
+        user.email = newUser.email
+        user.firstName = newUser.firstName
+        user.lastName = newUser.lastName
+        user.contactNumber = newUser.contactNumber
+        user.postcode = newUser.postcode
+        user.avatar = newUser.avatar
+        user.firebaseUid = newUser.firebaseUid
+        user.userType = newUser.userType
+        user.deviceToken = newUser.deviceToken
+        try user.save()
+        return user
     }
     
     

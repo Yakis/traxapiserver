@@ -29,10 +29,15 @@ final class SettingsController {
     
     
     fileprivate func update(request: Request) throws -> ResponseRepresentable {
+        let setting = try request.parameters.next(Setting.self)
         guard let json = request.json else { throw Abort.badRequest }
-        let track = try Setting(json: json)
-        try track.save()
-        return track
+        let newSetting = try Setting(json: json)
+        setting.trackUpdate = newSetting.trackUpdate
+        setting.tagNotify = newSetting.tagNotify
+        setting.locationEnabled = newSetting.locationEnabled
+        setting.user_id = newSetting.user_id
+        try setting.save()
+        return setting
     }
     
     
