@@ -29,10 +29,13 @@ final class ImagesController {
     
     
     fileprivate func update(request: Request) throws -> ResponseRepresentable {
+        let image = try request.parameters.next(Image.self)
         guard let json = request.json else { throw Abort.badRequest }
-        let track = try Image(json: json)
-        try track.save()
-        return track
+        let newImage = try Image(json: json)
+        image.imageUrl = newImage.imageUrl
+        image.track_id = newImage.track_id
+        try image.save()
+        return image
     }
     
     

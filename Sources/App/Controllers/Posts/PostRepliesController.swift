@@ -29,10 +29,14 @@ final class PostRepliesController {
     
     
     fileprivate func update(request: Request) throws -> ResponseRepresentable {
+        let postReply = try request.parameters.next(PostReply.self)
         guard let json = request.json else { throw Abort.badRequest }
-        let reply = try PostReply(json: json)
-        try reply.save()
-        return reply
+        let newPostReply = try PostReply(json: json)
+        postReply.content = newPostReply.content
+        postReply.post_comment_id = newPostReply.post_comment_id
+        postReply.user_id = newPostReply.user_id
+        try postReply.save()
+        return postReply
     }
     
     

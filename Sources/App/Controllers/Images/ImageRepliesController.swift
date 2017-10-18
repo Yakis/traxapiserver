@@ -29,10 +29,13 @@ final class ImageRepliesController {
     
     
     fileprivate func update(request: Request) throws -> ResponseRepresentable {
+        let imageReply = try request.parameters.next(ImageReply.self)
         guard let json = request.json else { throw Abort.badRequest }
-        let reply = try ImageReply(json: json)
-        try reply.save()
-        return reply
+        let newImageReply = try ImageReply(json: json)
+        imageReply.content = newImageReply.content
+        imageReply.image_comment_id = newImageReply.image_comment_id
+        try imageReply.save()
+        return imageReply
     }
     
     

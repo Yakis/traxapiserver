@@ -39,10 +39,13 @@ final class ImageCommentsController {
     
     
     fileprivate func update(request: Request) throws -> ResponseRepresentable {
+        let imageComment = try request.parameters.next(ImageComment.self)
         guard let json = request.json else { throw Abort.badRequest }
-        let comment = try ImageComment(json: json)
-        try comment.save()
-        return comment
+        let newImageComment = try ImageComment(json: json)
+        imageComment.content = newImageComment.content
+        imageComment.image_id = newImageComment.image_id
+        try imageComment.save()
+        return imageComment
     }
     
     

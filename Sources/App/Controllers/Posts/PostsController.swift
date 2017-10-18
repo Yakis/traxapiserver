@@ -36,8 +36,12 @@ final class PostsController {
     
     
     fileprivate func update(request: Request) throws -> ResponseRepresentable {
+        let post = try request.parameters.next(Post.self)
         guard let json = request.json else { throw Abort.badRequest }
-        let post = try Post(json: json)
+        let newPost = try Post(json: json)
+        post.content = newPost.content
+        post.track_id = newPost.track_id
+        post.image = newPost.image
         try post.save()
         return post
     }
@@ -89,8 +93,13 @@ final class PostsController {
     
     
     func addRoutes(to routeBuilder: RouteBuilder) {
+        
+        // /api/v1/posts/all
         routeBuilder.get("all", handler: getAll)
+        // /api/v1/posts/create
         routeBuilder.post("create", handler: create)
+        
+        // /api/v1/posts/:id
         routeBuilder.get(Post.parameter, handler: getOne)
         routeBuilder.patch(Post.parameter, handler: update)
         routeBuilder.delete(Post.parameter, handler: delete)

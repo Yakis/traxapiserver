@@ -39,10 +39,13 @@ final class VideoCommentsController {
     
     
     fileprivate func update(request: Request) throws -> ResponseRepresentable {
+        let videoComment = try request.parameters.next(VideoComment.self)
         guard let json = request.json else { throw Abort.badRequest }
-        let comment = try VideoComment(json: json)
-        try comment.save()
-        return comment
+        let newVideoComment = try VideoComment(json: json)
+        videoComment.content = newVideoComment.content
+        videoComment.video_id = newVideoComment.video_id
+        try videoComment.save()
+        return videoComment
     }
     
     

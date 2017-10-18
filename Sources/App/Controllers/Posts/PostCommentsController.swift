@@ -48,10 +48,14 @@ final class PostCommentsController {
     
     
     fileprivate func update(request: Request) throws -> ResponseRepresentable {
+        let postComment = try request.parameters.next(PostComment.self)
         guard let json = request.json else { throw Abort.badRequest }
-        let comment = try PostComment(json: json)
-        try comment.save()
-        return comment
+        let newPostComment = try PostComment(json: json)
+        postComment.content = newPostComment.content
+        postComment.post_id = newPostComment.post_id
+        postComment.user_id = newPostComment.user_id
+        try postComment.save()
+        return postComment
     }
     
     

@@ -29,8 +29,11 @@ final class VideosController {
     
     
     fileprivate func update(request: Request) throws -> ResponseRepresentable {
+        let video = try request.parameters.next(Video.self)
         guard let json = request.json else { throw Abort.badRequest }
-        let video = try Video(json: json)
+        let newVideo = try Video(json: json)
+        video.videoUrl = newVideo.videoUrl
+        video.track_id = newVideo.track_id
         try video.save()
         return video
     }

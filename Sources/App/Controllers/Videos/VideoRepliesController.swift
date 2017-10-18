@@ -29,10 +29,13 @@ final class VideoRepliesController {
     
     
     fileprivate func update(request: Request) throws -> ResponseRepresentable {
+        let videoReply = try request.parameters.next(VideoReply.self)
         guard let json = request.json else { throw Abort.badRequest }
-        let reply = try VideoReply(json: json)
-        try reply.save()
-        return reply
+        let newVideoReply = try VideoReply(json: json)
+        videoReply.content = newVideoReply.content
+        videoReply.video_comment_id = newVideoReply.video_comment_id
+        try videoReply.save()
+        return videoReply
     }
     
     

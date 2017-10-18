@@ -62,6 +62,7 @@ final class TracksController {
         track.adress = newTrack.adress
         track.child_friendly = newTrack.child_friendly
         track.latitude = newTrack.latitude
+        track.featured = newTrack.featured
         track.longitude = newTrack.longitude
         track.opening_times = newTrack.opening_times
         track.user_id = newTrack.user_id
