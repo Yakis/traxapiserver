@@ -95,10 +95,10 @@ final class VideosController {
         // /api/v1/videos/likes/create
         routeBuilder.post("likes", "create", handler: like)
         
-        // /api/v1/videos/likes/video?id=1
+        // /api/v1/videos/likes/video?id=:id
         routeBuilder.get("likes", "video", handler: getLikesCount)
         
-        // /api/v1/videos/likes?user_id=1&video_id=1
+        // /api/v1/videos/likes?user_id=:id&video_id=:id
         routeBuilder.get("likes", handler: isLiked)
     }
     

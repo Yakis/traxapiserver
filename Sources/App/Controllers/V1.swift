@@ -33,6 +33,8 @@ class V1: RouteCollection {
         let videos = v1.grouped("videos")
         let videoComments = v1.grouped("videocomments")
         let videoReplies = v1.grouped("videoreplies")
+        let events = v1.grouped("events")
+        
         
         let tracksController = TracksController()
         tracksController.addRoutes(to: tracks)
@@ -69,6 +71,10 @@ class V1: RouteCollection {
         
         let videoRepliesController = VideoRepliesController()
         videoRepliesController.addRoutes(to: videoReplies)
+        
+        let eventsController = EventsController()
+        eventsController.addRoutes(to: events)
+        
         
     }
     

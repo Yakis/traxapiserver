@@ -57,7 +57,7 @@ final class VideoRepliesController {
         routeBuilder.patch(ImageReply.parameter, handler: update)
         routeBuilder.delete(ImageReply.parameter, handler: delete)
         
-        // /api/v1/videoreplies/comment?id=1
+        // /api/v1/videoreplies/comment?id=:id
         routeBuilder.get("comment", handler: getByComment)
     }
     

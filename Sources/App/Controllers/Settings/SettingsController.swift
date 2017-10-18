@@ -50,8 +50,13 @@ final class SettingsController {
     
     
     func addRoutes(to routeBuilder: RouteBuilder) {
+        
+        // /api/v1/settings/all
         routeBuilder.get("all", handler: getAll)
+        // /api/v1/settings/create
         routeBuilder.post("create", handler: create)
+        
+        // /api/v1/settings/:id
         routeBuilder.get(Setting.parameter, handler: getOne)
         routeBuilder.patch(Setting.parameter, handler: update)
         routeBuilder.delete(Setting.parameter, handler: delete)

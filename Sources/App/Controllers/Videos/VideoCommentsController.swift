@@ -70,7 +70,7 @@ final class VideoCommentsController {
         routeBuilder.patch(VideoComment.parameter, handler: update)
         routeBuilder.delete(VideoComment.parameter, handler: delete)
         
-        // /api/v1/videocomments/video?id=1
+        // /api/v1/videocomments/video?id=:id
         routeBuilder.get("video", handler: getByVideo)
     }
     
