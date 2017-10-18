@@ -96,7 +96,7 @@ final class ImagesController {
         // /api/v1/images/likes/create
         routeBuilder.post("likes", "create", handler: like)
         
-        // /api/v1/images/likes/video?id=1
+        // /api/v1/images/likes/image?id=1
         routeBuilder.get("likes", "image", handler: getLikesCount)
         
         // /api/v1/images/likes?user_id=1&image_id=1
