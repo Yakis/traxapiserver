@@ -37,6 +37,23 @@ final class UsersController {
     }
     
     
+    fileprivate func updateSettings(request: Request) throws -> ResponseRepresentable {
+        guard let user_id = request.query?["user_id"]?.int else {
+            fatalError("User id not found!)")
+        }
+        let settings = try Setting.all().filter { $0.user_id == user_id }
+        guard let setting = settings.first else { throw Abort.notFound }
+        guard let json = request.json else { throw Abort.badRequest }
+        let newSetting = try Setting(json: json)
+        setting.trackUpdate = newSetting.trackUpdate
+        setting.tagNotify = newSetting.tagNotify
+        setting.locationEnabled = newSetting.locationEnabled
+        setting.user_id = newSetting.user_id
+        try setting.save()
+        return setting
+    }
+    
+    
     fileprivate func searchByName(request: Request) throws -> ResponseRepresentable {
         guard let username = request.query?["username"]?.string else {
             fatalError("Track not found!)")
@@ -102,6 +119,10 @@ final class UsersController {
         
         // /api/v1/users/settings/create
         routeBuilder.post("settings", "create", handler: saveSettings)
+        
+        // /api/v1/users/settings?user_id=:id
+        routeBuilder.patch("settings", handler: updateSettings)
+        
     }
     
     
