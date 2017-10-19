@@ -26,7 +26,6 @@ class V1: RouteCollection {
         let posts = v1.grouped("posts")
         let postComments = v1.grouped("postcomments")
         let postreplies = v1.grouped("postreplies")
-        let settings = v1.grouped("settings")
         let images = v1.grouped("images")
         let imageComments = v1.grouped("imagecomments")
         let imageReplies = v1.grouped("imagereplies")
@@ -50,9 +49,6 @@ class V1: RouteCollection {
         
         let postRepliesController = PostRepliesController()
         postRepliesController.addRoutes(to: postreplies)
-        
-        let settingsController = SettingsController()
-        settingsController.addRoutes(to: settings)
         
         let imagesController = ImagesController()
         imagesController.addRoutes(to: images)
