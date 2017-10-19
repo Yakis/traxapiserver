@@ -86,8 +86,14 @@ final class ImagesController {
     
     
     func addRoutes(to routeBuilder: RouteBuilder) {
+        
+        // /api/v1/images/all
         routeBuilder.get("all", handler: getAll)
+        
+        // /api/v1/images/create
         routeBuilder.post("create", handler: create)
+        
+        // /api/v1/images/:id
         routeBuilder.get(Image.parameter, handler: getOne)
         routeBuilder.patch(Image.parameter, handler: update)
         routeBuilder.delete(Image.parameter, handler: delete)

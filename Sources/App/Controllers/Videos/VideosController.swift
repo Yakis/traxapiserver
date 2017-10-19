@@ -86,8 +86,14 @@ final class VideosController {
     
     
     func addRoutes(to routeBuilder: RouteBuilder) {
+        
+        // /api/v1/videos/all
         routeBuilder.get("all", handler: getAll)
+        
+        // /api/v1/videos/create
         routeBuilder.post("create", handler: create)
+        
+        // /api/v1/videos/:id
         routeBuilder.get(Video.parameter, handler: getOne)
         routeBuilder.patch(Video.parameter, handler: update)
         routeBuilder.delete(Video.parameter, handler: delete)

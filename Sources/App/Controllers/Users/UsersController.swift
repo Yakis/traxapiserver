@@ -9,14 +9,40 @@
 import PostgreSQLProvider
 
 final class UsersController {
+    
     fileprivate func getAll(request: Request) throws -> ResponseRepresentable {
         return try User.all().makeJSON()
     }
     
     
     fileprivate func getOne(request: Request) throws -> ResponseRepresentable {
-        let track = try request.parameters.next(User.self)
-        return track
+        let user = try request.parameters.next(User.self)
+        return user
+    }
+    
+    
+    fileprivate func getSettings(request: Request) throws -> ResponseRepresentable {
+        guard let user_id = request.query?["user_id"]?.int else {
+            fatalError("User id not found!)")
+        }
+        let settings = try Setting.all().filter { $0.user_id == user_id }
+        return try settings.makeJSON()
+    }
+    
+    fileprivate func saveSettings(request: Request) throws -> ResponseRepresentable {
+        guard let json = request.json else { throw Abort.badRequest }
+            let settings = try Setting(json: json)
+            try settings.save()
+            return try settings.makeJSON()
+    }
+    
+    
+    fileprivate func searchByName(request: Request) throws -> ResponseRepresentable {
+        guard let username = request.query?["username"]?.string else {
+            fatalError("Track not found!)")
+        }
+        let users = try User.all().filter { $0.username.lowercased().contains(username.lowercased()) }
+        return try users.makeJSON()
     }
     
     
@@ -56,11 +82,26 @@ final class UsersController {
     
     
     func addRoutes(to routeBuilder: RouteBuilder) {
+        
+        // /api/v1/users/all
         routeBuilder.get("all", handler: getAll)
+        
+        // /api/v1/users/create
         routeBuilder.post("create", handler: create)
+        
+        // /api/v1/users/:id
         routeBuilder.get(User.parameter, handler: getOne)
         routeBuilder.patch(User.parameter, handler: update)
         routeBuilder.delete(User.parameter, handler: delete)
+        
+        // /api/v1/users?username=:username
+        routeBuilder.get("", handler: searchByName)
+        
+        // /api/v1/users/settings?user_id=:id
+        routeBuilder.get("settings", handler: getSettings)
+        
+        // /api/v1/users/settings/create
+        routeBuilder.post("settings", "create", handler: saveSettings)
     }
     
     

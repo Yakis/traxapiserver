@@ -20,14 +20,6 @@ final class SettingsController {
     }
     
     
-    fileprivate func create(request: Request) throws -> ResponseRepresentable {
-        guard let json = request.json else { throw Abort.badRequest }
-        let track = try Setting(json: json)
-        try track.save()
-        return track
-    }
-    
-    
     fileprivate func update(request: Request) throws -> ResponseRepresentable {
         let setting = try request.parameters.next(Setting.self)
         guard let json = request.json else { throw Abort.badRequest }
@@ -53,8 +45,6 @@ final class SettingsController {
         
         // /api/v1/settings/all
         routeBuilder.get("all", handler: getAll)
-        // /api/v1/settings/create
-        routeBuilder.post("create", handler: create)
         
         // /api/v1/settings/:id
         routeBuilder.get(Setting.parameter, handler: getOne)

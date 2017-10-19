@@ -70,6 +70,7 @@ final class EventsController {
         
         // /api/v1/events/all
         routeBuilder.get("all", handler: getAll)
+        
         // /api/v1/events/create
         routeBuilder.post("create", handler: create)
         
