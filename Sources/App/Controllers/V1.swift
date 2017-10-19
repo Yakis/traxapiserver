@@ -21,8 +21,8 @@ class V1: RouteCollection {
         //let tracks = secured.grouped("tracks")
         
         
-        let tracks = v1.grouped("tracks")
         let users = v1.grouped("users")
+        let tracks = v1.grouped("tracks")
         let posts = v1.grouped("posts")
         let postComments = v1.grouped("postcomments")
         let postreplies = v1.grouped("postreplies")

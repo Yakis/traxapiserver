@@ -108,7 +108,7 @@ extension User: Preparation {
             user.string(User.firebaseUidKey)
             user.string(User.contactNumberKey)
             user.string(User.userTypeKey)
-            try database.index("username", for: User.self)
+            //try database.index("username", for: User.self)
         }
     }
     
