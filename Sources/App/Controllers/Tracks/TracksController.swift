@@ -97,18 +97,23 @@ final class TracksController {
     
     
     func addRoutes(to routeBuilder: RouteBuilder) {
+        
+        // /api/v1/tracks/all
         routeBuilder.get("all", handler: getAll)
+        
+        // /api/v1/tracks/create
         routeBuilder.post("create", handler: create)
+        
+        // /api/v1/tracks/:id
         routeBuilder.get(Track.parameter, handler: getOne)
         routeBuilder.patch(Track.parameter, handler: update)
         routeBuilder.delete(Track.parameter, handler: delete)
         routeBuilder.get("", handler: getByName)
         
-        // /tracks/userid=1
+        // /api/v1/tracks/userid=1
         routeBuilder.get("", handler: getByUser)
         
-        //Child routes
-       // routeBuilder.post(Track.parameter, "images", handler: saveImage)
+        // /api/v1/tracks/:id/images
         routeBuilder.get(Track.parameter, "images", handler: getImages)
         
 //        let adminMiddleware = AdminMiddleware()
