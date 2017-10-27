@@ -15,6 +15,7 @@ final class UserToken: Model {
     var user_id: Int
     
     
+    
     // Use these keys instead of magic strings
     static let idKey = "id"
     static let tokenKey = "token"
