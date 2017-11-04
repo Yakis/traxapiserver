@@ -22,6 +22,7 @@ final class Track: Model {
     var child_friendly: Bool
     var rating: Double
     var user_id: Int
+    var image: String
     var featured: Int
     
     
@@ -37,7 +38,7 @@ final class Track: Model {
     static let pricesKey = "prices"
     static let childFriendlyKey = "child_friendly"
     static let ratingKey = "rating"
-    static let imagesKey = "images"
+    static let imageKey = "image"
     static let userIdKey = "user_id"
     static let featuredKey = "featured"
     static let user_idKey = "user_id"
@@ -53,6 +54,7 @@ final class Track: Model {
          child_friendly: Bool,
          rating: Double,
          user_id: Int,
+         image: String,
          featured: Int
         ) {
         self.name = name
@@ -66,6 +68,7 @@ final class Track: Model {
         self.child_friendly = child_friendly
         self.rating = rating
         self.user_id = user_id
+        self.image = image
         self.featured = featured
     }
     
@@ -82,6 +85,7 @@ final class Track: Model {
         self.child_friendly = try row.get(Track.childFriendlyKey)
         self.rating = try row.get(Track.ratingKey)
         self.user_id = try row.get(Track.user_idKey)
+        self.image = try row.get(Track.imageKey)
         self.featured = try row.get(Track.featuredKey)
     }
     
@@ -99,6 +103,7 @@ final class Track: Model {
         try row.set(Track.childFriendlyKey, child_friendly)
         try row.set(Track.ratingKey, rating)
         try row.set(Track.user_idKey, user_id)
+        try row.set(Track.imageKey, image)
         try row.set(Track.featuredKey, featured)
         return row
     }
@@ -119,6 +124,7 @@ extension Track: Preparation {
             builder.string(Track.pricesKey)
             builder.bool(Track.childFriendlyKey)
             builder.double(Track.ratingKey)
+            builder.string(Track.imageKey)
             builder.int(Track.featuredKey)
             builder.foreignId(for: User.self)
         }
@@ -144,6 +150,7 @@ extension Track: JSONConvertible {
                   child_friendly: try json.get(Track.childFriendlyKey),
                   rating: try json.get(Track.ratingKey),
                   user_id: try json.get(Track.user_idKey),
+                  image: try json.get(Track.imageKey),
                   featured: try json.get(Track.featuredKey))
     }
     
@@ -161,10 +168,7 @@ extension Track: JSONConvertible {
         try json.set(Track.childFriendlyKey, child_friendly)
         try json.set(Track.ratingKey, rating)
         try json.set(Track.user_idKey, user_id)
-        let photos = try images.all()
-        for photo in photos {
-        try json.set(Track.imagesKey, photo.imageUrl)
-    }
+        try json.set(Track.imageKey, image)
         try json.set(Track.featuredKey, featured)
         return json
     }

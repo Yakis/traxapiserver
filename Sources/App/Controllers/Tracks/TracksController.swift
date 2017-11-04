@@ -38,16 +38,11 @@ final class TracksController {
     
     fileprivate func create(request: Request) throws -> ResponseRepresentable {
         guard let json = request.json else { throw Abort.badRequest }
-        guard let images = json[Image.imagesKey]?.array else { throw Abort.badRequest }
         let track = try Track(json: json)
         guard let user = try User.find(track.user_id) else {throw Abort.badRequest}
         switch user.userType {
         case "owner":
             try track.save()
-            guard let trackId = track.id?.int else { throw Abort.badRequest }
-            for imageUrl in images {
-                try saveImage(for: trackId, imageUrl: imageUrl.string!)
-            }
             return track
         default: throw Abort.unauthorized
         }
