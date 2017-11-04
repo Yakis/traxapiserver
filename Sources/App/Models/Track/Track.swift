@@ -161,7 +161,10 @@ extension Track: JSONConvertible {
         try json.set(Track.childFriendlyKey, child_friendly)
         try json.set(Track.ratingKey, rating)
         try json.set(Track.user_idKey, user_id)
-        try json.set(Track.imagesKey, images.all())
+        let photos = try images.all()
+        for photo in photos {
+        try json.set(Track.imagesKey, photo.imageUrl)
+    }
         try json.set(Track.featuredKey, featured)
         return json
     }
