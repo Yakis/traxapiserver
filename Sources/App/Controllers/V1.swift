@@ -8,15 +8,19 @@
 
 import HTTP
 import Vapor
+import AuthProvider
+
 class V1: RouteCollection {
     
     func build(_ builder: RouteBuilder) throws {
         let v1 = builder.grouped("api", "v1")
         
-        
+        let middleware = APIMiddleware()
+        let secured = v1.grouped(middleware)
+        let tracks = secured.grouped("tracks")
         
         let users = v1.grouped("users")
-        let tracks = v1.grouped("tracks")
+        //let tracks = v1.grouped("tracks")
         let posts = v1.grouped("posts")
         let postComments = v1.grouped("postcomments")
         let postreplies = v1.grouped("postreplies")
