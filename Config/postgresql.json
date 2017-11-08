@@ -1,7 +1,12 @@
 //{ "url": "$DATABASE_URL" }
+/*
 {
     "hostname": "$DATABASE_HOSTNAME",
     "user": "$DATABASE_USER",
     "password": "$DATABASE_PASSWORD",
     "database": "$DATABASE_DB"
+}
+ */
+{
+    "url": "$TOKEN"
 }
