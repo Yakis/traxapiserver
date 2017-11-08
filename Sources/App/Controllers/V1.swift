@@ -8,13 +8,10 @@
 
 import HTTP
 import Vapor
-import FirebaseAuthAmanGarry
-
 class V1: RouteCollection {
     
     func build(_ builder: RouteBuilder) throws {
         let v1 = builder.grouped("api", "v1")
-        
         let middleware = FirebaseAuthMiddleware(with: "mytrax-47920")
         let secured = v1.grouped(middleware)
         
