@@ -1,6 +1,8 @@
 import FluentProvider
 import PostgreSQLProvider
 import FirebaseAuthAmanGarry
+import JWT
+import AuthProvider
 
 extension Config {
     public func setup() throws {
@@ -17,6 +19,7 @@ extension Config {
         try addProvider(FluentProvider.Provider.self)
         try addProvider(PostgreSQLProvider.Provider.self)
         try addProvider(FirebaseAuthAmanGarry.Provider.self)
+        try addProvider(AuthProvider.Provider.self)
     }
     
     /// Add all models that should have their
