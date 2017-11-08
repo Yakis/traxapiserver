@@ -65,9 +65,13 @@ final class UsersController {
     
     fileprivate func create(request: Request) throws -> ResponseRepresentable {
         guard let json = request.json else { throw Abort.badRequest }
-        let track = try User(json: json)
-        try track.save()
-        return track
+        let user = try User(json: json)
+        if try User.makeQuery().filter("firebase_uid", user.firebaseUid).first() == nil {
+            try user.save()
+            return user
+        } else {
+            return "User already exist"
+        }
     }
     
     
